@@ -1,0 +1,37 @@
+#PQ Tests
+#one point tests
+empty : 1
+max : 1
+size : 1
+is_empty : 1
+
+#Insert/Remove tests
+insert_check_comp : 5
+insert_empty : 2
+insert_rand : 8
+insert_rand_no_duplicates : 7
+remove_empty : 1
+remove_rand : 4
+remove_rand_no_duplicates : 3
+#Performance test
+PQ_performance : 10
+
+#Solver Tests
+start_at_goal : 1
+unreachable : 1
+uses_goodness : 7
+tiebreak_short_paths : 3 
+solve_rand : 8
+
+#Huffman Tests
+build_tree_has_correct_mappings : 3
+build_tree_is_optimal : 7
+encode_correct : 3
+partial_credit_encode_correct_with_self : 7
+decode_correct : 3
+partial_credit_decode_correct_with_self : 5
+partial_credit_round_trip : 2
+stack_overflow : 5
+
+
+
