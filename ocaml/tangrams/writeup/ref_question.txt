@@ -1,0 +1,67 @@
+% This is the ref question for PS4. The tex file wasn't started yet so I just
+% put a description here without any fancy typesetting that can pretty much be
+% copy-pasted into the writeup.
+
+% We were thinking of having them do the 'party problem' but it requires a bit
+% of dynamic programming/algorithm design and I think that's unnecessary work
+% at this point.
+
+PART 1:
+
+The Collatz sequence c(n) is defined as follows. We pick a starting value s,
+and then compute c(0)=s,
+\[c(n)=\begin{cases}3n+1 & c(n-1)\mathrm{~odd} \\
+n/2 & c(n-1)\mathrm{~even}\end{cases}\]
+for $n>0$. Observe that once we reach c(m)=1, we have the cycle c(m+1)=4,
+c(m+2)=2,c(m+3)=1. Define N(s) to be the number of steps required to reach 1
+starting from s. For example, starting at 5, the sequence goes
+\[5\to 16\to 8\to 4\to 2\to 1,\]
+so that $N(5)=5$.
+
+It is an open question whether $N(s)<\infty$ for every s! When searching for
+values of s such that the sequence does not converge, we end up computing the
+N for the same values over and over. For instance, once we've computed N(5),
+we have implicitly computed N(16) as well (see above). Fill in the function
+
+collatz: int list -> int list
+
+which takes a list of integers [n_1,...,n_m] and computes [N(n_1),...,N(n_m)].
+Design your function to be memoized so that you never compute the number of
+steps for the same value more than once.
+
+PART 2:
+
+Extending the Collatz sequence calculator as done above to cache values that
+have already been calculated is sometimes called ``memoization.'' Now, we're
+going to extend the above pattern to create a generic function which maps a
+given function to its memoized version. In the case that the function
+\texttt{f} we're trying to memoize is non-recursive, this is easy: we simply
+compute the function and then store its value in a hash table or array.
+
+Thishis is more difficult if we want to memoize a recursive function. A
+given recursive function is already defined to call itself, not its memoized
+version. However, it turns out that there is a way to solve this problem! By
+way of example, consider the Fibonacci function
+
+let rec fib n = if n < 2 then 1 else fib (n-1) + fib (n-2)
+
+Since fib occurs on both sides of the equals sign, we can think of fib as the
+solution to a recursive equation. I.e., fib is a fixpoint of the non-recursive
+functional t_fib:
+
+let t_fib g n = if n < 2 then 1 else g (n-1) + g (n-2)
+
+Observe that for a function g, t_fib g evaluates to
+
+fun n -> if n < 2 then 1 else g (n-1) + g (n-2)
+
+We can think of this as a better approximation to the fixpoint fib. Repeatedly
+doing this, we will converge on the fixpoint. We can obtain the fixpoint fib by
+applying a general fixpoint functional to t_fib:
+
+let fix t = let rec g x = t g x in g
+let fib = fix t_fib
+
+Your task: implement the function
+fix_memo: (('a -> 'b) -> 'a -> 'b) -> 'a -> 'b
+Which computes the least fixpoint of a given functional with memoization.

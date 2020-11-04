@@ -1,0 +1,255 @@
+Problem set 4 rubric and grading plan
+
+Total: 180 points
+
+Testing for no-compiles:
+  we will run the smoke test on Thursday and send no-compile emails.  We will
+  take a look at them first to make sure the smoke test itself isn't broken
+
+  if the other tests give no-compiles but the smoke test runs, then there is a
+  bug in the other tests, so we will have to figure out what's going on
+  manually.  If the smoke test doesn't compile, then the student will have had
+  the opportunity to fix, so they will get a zero for the corresponding
+  portion.  Since the whole project is interrelated, we'll have to consider how
+  whether and how to comment out specific portions to grade the rest.
+
+Style (up to 4 point deduction):
+  There is a lot of opportunity in the pset to make beautiful code, and a lot of
+  opportunity to make ugly code.  In general:
+    -4 point for code that is genuinely hard to read
+    -2 points for code that has a few stylistic errors (e.g. wrapped lines) but
+       is mostly readable
+    -0 points for code that is clear and pleasant to look at
+The process: there will be a single style column.  After grading a portion of a
+paper, look in the style column.  If there's already a style score, decide
+whether it is reasonable. You may lower it or keep it the same.
+
+
+
+Exercise 1 (60 points)
+======================
+
+Ints, Integers, and Floats: 15 points
+-------------------------------------
+
+typical papers:
+  A (10-15):
+    one or two bugs
+  B (5-10):
+    lots of bugs, or some unimplemented functionality
+  C (1-5):
+    one of the three is missing or totally broken
+
+tests:
+  for all three: run the ring or field properties on all pairs of the following:
+    [zero, one, -one, two, -two]
+
+  for floats: also run them with
+    +/- one half
+    +/- something very large
+    +/- something very small
+
+  for big_ints:
+    also with max_int and -max_int
+
+  for floats:
+    test round-off error (0 === 1e-7 should be true)
+
+Root23: 15 points
+-----------------
+
+typical papers:
+  A (10-15):
+    one or two bugs
+    used ints instead of integers (high end of range)
+  B (5-10):
+    got +, - and *, but failed on some of the cases of is_non_neg
+  C (1-5):
+    is_non_neg is completely wrong approach (e.g. doesn't consider cases for
+                                             signs of coeffs)
+    big mistakes in + or *
+
+tests:
+  standard ring properties tests, also with sqrt2, sqrt3, sqrt6
+
+  sqrt2 * sqrt2 === two, sqrt3 * sqrt3 === 3, sqrt6 * sqrt6 === 6
+
+FieldOfFractions: 15 points
+---------------------------
+
+typical papers:
+  A (10-15):
+  B (5-10):
+    The types of the numbers are exposed
+    inv zero succeeds
+  C (1-5):
+
+tests:
+  one / zero fails for FieldOfFractions(Ints)
+  standard field properties tests for FoF(Ints)
+
+Rationals and Rot15: 15 points
+------------------------------
+
+typical papers:
+  Karma:
+    reduced fractions (more for more general)
+
+  A (10-15):
+    didn't do reduced fractions (we explicitly said they didn't have to)
+    didn't do roughly_half      (we explicitly said they didn't have to)
+  B (5-10):
+    didn't use FoF for one or both but it all worked
+  C (1-5):
+    didn't use FoF and had bugs
+
+tests:
+
+Exercise 2: Utils (10 points)
+=============================
+
+typical papers:
+  A (7-10):
+    one or two bugs
+  B (4-6):
+    many bugs
+    number_of_int fails for negative numbers 
+  C (1-3):
+    largely incomplete
+    uses floats or something
+
+tests:
+  do each of the corresponding operations for a handful of Ints and compare to
+  the corresponding Pervasives operations
+
+Exercise 3 (65 points)
+======================
+
+Note: if somebody is using something other than int -> rational, and are using
+a rep invariant other than the one we gave them for approximate and create, then
+bring it to my attention and we'll figure out what to do.
+
+create, approximate, float_of_number, format, ~- (5 points)
+-----------------------------------------------------------
+
+if they're there and do basically the right thing: 5 points
+
+(===) and is_non_neg (10 points)
+--------------------------------
+
+typical papers:
+  A (6-10):
+    small mistakes: e.g. checks for < 10^-k instead of 2*10^-k
+  B (1-5):
+    (===) can return true
+    only consults first terms
+
+(+) (10 points)
+(*) (10 points)
+inv (10 points)
+pi  (10 points)
+e   (10 points)
+---------------
+
+typical papers:
+  Karma:
+    interesting approaches to making things converge quickly
+    nicely factored code
+
+  A (7-10):
+    sequence converges to correct value and some effort was made to make it
+    converge fast enough
+
+  B (4-6):
+    computes a sequence that converges but not fast enough
+
+  C (1-3):
+    sequence does not converge to correct value
+
+
+tests:
+  x === x should time out for a variety of x's (can we test this?)
+  is_non_neg zero should time out
+
+  is_non_neg zero, one, -one
+
+  test === and is_non_neg with sequences that converge to zero slowly
+  test === and is_non_neg with sequences that are zero for a while and then
+               start increasing
+
+  approximate 1 (inv zero) should run forever
+
+  inv zero should terminate normally
+
+  run approximations to pi and e and make sure they do the right thing for the
+  first few terms
+
+  we should smoke test (+) and (*) as well
+
+good approximations for pi:
+
+good approximations for e:
+
+
+Geometry (25 points) 
+====================
+
+Convex hull (20 points)
+-----------------------
+
+Things to look for:
+ - need to compute list of pairs of points and subtract them
+ - need to compute convex hull
+ - need to remove duplicate points
+ - need to be output in the right order
+
+We'll put together test cases during the grading session.
+
+Minkowski difference (5 points)
+-------------------------------
+
+Should
+ - compute the convex mink. differences
+ - take the union
+
+If it looks reasonable: full credit
+Spend less than a minute looking at this function
+
+If it's blank: 0
+
+Game (15 points)
+================
+
+If it runs correctly using Rationals, 15 points
+
+If not, look at the code
+ - we explicitly allowed non-working solutions due to NaN in
+   Rationals.float_of_number (which will manifest as disappearing shapes)
+ - we explicitly allowed (very) slow solutions caused by unreduced fractions
+
+ - We'll decide the actual point breakdown during grading, after looking at some
+   submissions
+
+Optionally run with floats.  It should crash, but it should work quickly until
+then.
+ - try without shapes touching (pick up and drop a few)
+ - try with shapes touching (they should slide smoothly without overlap)
+   - it will then crash, and this is expected
+
+
+Written Questions (10 points)
+=============================
+
+correct answers:
+  (a) times_inverse will be false for any input other than zero
+  (b) the ring properties are all satisfied.
+        - squares_non_neg fails for anything bigger than sqrt(max_int) or
+          less than -sqrt(max_int).  
+        - non_negative_times also fails
+        - non_negative_plus  also fails
+  (c) you will have to use your judgement; there are lots of good answers
+  (d) wrong answer: too slow.  right answer: non-termination
+
+scoring: two points each, or zero for no submission
+
+

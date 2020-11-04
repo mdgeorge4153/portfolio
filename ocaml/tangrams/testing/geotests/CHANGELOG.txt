@@ -1,0 +1,14 @@
+
+version 2: released 10/14
+ - added from_numerator to FieldOfFractions interface
+ - added nums.cma to Makefile
+
+ - added a specification to Field.inv making the behavior explicitly undefined
+   for division by zero
+ - added a specification to FieldOfFractions.inv making it raise an exception
+   for division by zero.
+
+version 1: released 10/6
+ - initial revision
+ - region.ml is unimplemented; we will release an implementation soon.
+

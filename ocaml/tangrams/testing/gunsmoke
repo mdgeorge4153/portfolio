@@ -1,0 +1,7 @@
+TEST_HOME=../..
+
+cp $TEST_HOME/lib/* .
+cp $TEST_HOME/tests/* .
+
+make
+

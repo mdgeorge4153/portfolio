@@ -1,0 +1,112 @@
+This is a prototype implementation of PS4.  Here is an overview of the project
+we have in mind:
+
+The ultimate goal of the project is to allow users to drag and drop polygons
+while maintaining the invariant that no two of them overlap.  In support of
+this, there are three major tasks.
+
+Part 1: exact arithmetic (exercises modules and functors)
+=========================================================
+
+In order for the geometry to work out properly, the underlying arithmetic must
+be exact.  Rounding error from floating point numbers will allow the users to
+create a ``hole'' out of polygons that another polygon should be able to fit
+into, but can't.
+
+The idea behind this part is to get them to write generic algorithms that work
+with different kinds of numbers.  The algorithms would be basic geometric
+primitives like point-line intersection, line-line intersection, etc.
+
+I would want them to have two signatures, Ring and Field; Ring contains 1, 0,
+addition, negation, equality, and multiplication; Field adds division to the
+mix.
+
+They can then implement Ring using the integers (really easy), and Field using
+floats (also really easy).
+
+We also want them to implement the field of infinite precision real numbers
+using streams (not so easy).  And it would be cool to get them to implement pi.
+
+Then there are some nice functors that they can give:
+ - FieldOfFractions is a functor from Rings to Fields: the numbers in the field
+   are pairs of numbers from the ring, and represent fractions.
+ - If we add divmod or gcd to Ring, then we could have them implement reduced
+   fractions.
+ - FunctionRing is a functor that gives a Ring structure to the set of
+   functions with range equal to a ring.  Similarly for FunctionField
+ - You can make an optimizing functor that builds up expression trees and uses
+   the distributive law to reduce the number of multiplications
+ - The ring of nxn matrices over a ring is another possibility; this might be a
+   good way to use the optimizer.  It would also show them why they really want
+   dependent types.
+
+Of these, FieldOfFractions is the only one we need for what follows.
+
+We also want them to implement the field of infinite precision real numbers
+using streams (not so easy).  And it would be cool to get them to implement pi.
+
+
+geometry
+========
+
+The application we have in mind is collision avoiding drag-and-drop.  So they
+are given a set of polygons P1, P2, ... in the plane, and the user can drag
+them around.  But if the user tries to make them overlap, they will slide along
+each other.
+
+Here's how this can be done.  When the user clicks on an object (say P1) to
+start dragging it, we compute the minkowski difference X of the dragged object
+(P1) with all of the other objects (P2 ... Pn).  X is the set of points x where
+placing P1 at x would cause it to intersect with one of the other shapes.  We
+can compute this by taking the minkowski difference of P1 and P2, of P1 and P3,
+and so on (which is easy if the shapes are convex), and then taking their union
+(which is the hard part).  This is hard to describe without drawing you a
+picture.
+
+Once we compute this set, the dragging part is easy.  Whenever the mouse moves
+to position x, if x is not in X then we simply put P1 at x (there is no
+collision).  If the x is in X, then we find the closest point y to the mouse
+that is on the boundary of X and put P1 at y.  This leads to a really nice
+drag-and-drop experience.  And it's much better than a physics-based model,
+because it lets you do things like pulling objects into and out of holes, and
+also makes it easy to do things like snapping.  I have a demo (in C++).
+
+
+Here's the cool thing about this problem: The geometry can be entirely
+parameterized on a number type using the modules above.  They can start out by
+using floats (with a definition of equality that uses equal to within some
+tolerance).  I think that if you do this, you'll be able to easily hit the
+tolerances by putting a bunch of obstructions around a shape P and then
+dragging P out of and back into the hole.  I don't think that it will work,
+even though it should.  But, if they simply swap out Floats for Rationals (i.e.
+FieldOfFractions (TheIntegers)), then it will suddenly work.
+
+Then they might say, "well what if I want to rotate the objects?".  It turns
+out that you can allow rotation by an integer fraction of a circle by extending
+the rationals.  For example, since cos 45 = sqrt(2)/2, you can represent all
+the numbers achievable by rotating a polygon through 45 degrees and using their
+geometric algorithms by storing numbers of the form (a + b*sqrt(2)) / (c +
+d*sqrt(2)).  They should be able to whip up these kinds of numbers in about 10
+minutes given their numbers framework (this is just a FieldOfFractions).  If
+you want to rotate by multiples of 15 degrees, you can do it (exactly) with
+numbers of the form (a + b*sqrt(2) + c*sqrt(3) + d*sqrt(6))/... (also a
+FieldOfFractions).
+
+
+The last little lesson of the problem set will come if they say to themselves
+(or we ask them) "well I already have infinite precision numbers, why do I need
+these funny square-root things?".  They could try to plug their infinite
+precision numbers in, and would notice that their geometry takes an awful long
+time to run (i.e. it runs for ever).  So streams are really cool, but they
+can't solve every problem.
+
+summary
+=======
+
+This problem can hit the following themes:
+
+- modules, functors, and generic programming
+- streams
+- refs and complex data structures (necessary to do the polygon union in the
+  geometry section)
+
