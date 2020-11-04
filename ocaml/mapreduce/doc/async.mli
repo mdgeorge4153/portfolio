@@ -10,7 +10,7 @@
 module Std : sig
 
 (******************************************************************************)
-(** {2 Blocking functions}                                                    *)
+(** {2 Blocking and non-blocking functions}                                   *)
 (******************************************************************************)
 
 module Deferred : sig
@@ -28,7 +28,16 @@ module Deferred : sig
       deferreds is fulfilled *)
 
   module List : sig
-    (** Provides blocking variants of the standard List module functions *)
+    (** Provides non-blocking variants of the standard List module functions. By
+        default, [map], [iter], and [filter] process their input list
+        sequentially. To make these functions process their input list in
+        parallel, pass [~how:`Parallel] as an argument to the functions, and
+        additionally prefix the function being passed in with [~f:]. For
+        example,
+
+    {[
+    Deferred.List.map ~how:`Parallel [1; 2; 3] ~f:return
+    ]} *)
 
     val map    : 'a list -> ('a -> 'b t) -> 'b list t
     val iter   : 'a list -> ('a -> unit t) -> unit t
@@ -47,21 +56,23 @@ end (* of Deferred *)
     undetermined may at some point become determined with value v, and will
     henceforth always be determined with value v.
 
-    Any Async function that needs to wait for something to happen (i.e.
-    "block") will return a [Deferred.t].  The function itself will return
-    immediately, allowing the calling program to continue to do other tasks.
-    Thus blocking functions should have the type ['a -> 'b Deferred.t].  *)
+    Any Async function that needs to wait for something to happen 
+    will return a [Deferred.t].  The function itself will return
+    immediately, allowing the caller to continue to do other tasks.
+    The caller therefore does not have to block while it waits for the
+    function to return.  Thus non-blocking functions have the type 
+    ['a -> 'b Deferred.t].  *)
 
 val (>>=)  : 'a Deferred.t -> ('a -> 'b Deferred.t) -> 'b Deferred.t
-(** [>>=] is used to chain blocking functions together.  [x >>= g] will cause
+(** [>>=] is used to chain non-blocking functions together.  [x >>= g] will cause
     [g] to be run after [x] is determined, with the value of [x] as input.  The
     deferred returned by [(>>=)] will become determined when [g] completes.
 
     There are two common stylistic idioms used when using [>>=].  The first is
     that many functions can be joined together with [>>=] without parentheses.
     For example, if one wants to wait for [x] to be determined, and then run
-    [f] on the result, and then run the blocking function [g] on the output of
-    [f], and then run the blocking function [h] on the result of [f], one would
+    [f] on the result, and then run the non-blocking function [g] on the output of
+    [f], and then run the non-blocking function [h] on the result of [f], one would
     write the following:
     {[
     x >>= f >>= g >>= h
@@ -100,7 +111,7 @@ val (>>=)  : 'a Deferred.t -> ('a -> 'b Deferred.t) -> 'b Deferred.t
     *)
 
 val (>>|) : 'a Deferred.t -> ('a -> 'b) -> 'b Deferred.t
-(** [>>|] is similar to [>>=], but it is used for non-blocking functions.  It
+(** [>>|] is similar to [>>=], but it is used for blocking functions.  It
     can be mixed to chains of functions joined by [>>=].  For example, the
     provided function [WordCount.App.Make.main] is implemented as follows:
     {[
@@ -111,18 +122,18 @@ val (>>|) : 'a Deferred.t -> ('a -> 'b) -> 'b Deferred.t
     ]}
 
     filenames is a list of file names: [["foo.txt"; "bar.txt"]].
-    {!Deferred.List.map} is like List.map except that it works with blocking
+    {!Deferred.List.map} is like List.map except that it works with non-blocking
     functions like {!Reader.file_lines}.
 
     The output of this line is a list containing a list of lines of ["foo.txt"]
     and a list of lines of ["bar.txt"].  We want to combine these into a single
     list, so we pass them through the [List.flatten] function.
-    Since [List.flatten] is non-blocking, we use [>>|].  We then
+    Since [List.flatten] is blocking, we use [>>|].  We then
     pass the combined list of lines to the [map_reduce] function
-    (using [>>=] since [map_reduce] is a blocking function), and
-    finally pass the results of [map_reduce] to the (blocking)
+    (using [>>=] since [map_reduce] is a non-blocking function), and
+    finally pass the results of [map_reduce] to the (non-blocking)
     [output] function.
-    
+
     Be aware that [>>|] does not play as nicely with anonymous functions as
     [>>=] does.  The following code does {b not} work:
     {[
@@ -213,7 +224,7 @@ module Pipe : sig
       has been closed (we have not documented the [close] function here). *)
 end
 
-(** The {!Deferred.List} contains blocking versions of many familiar List
+(** The {!Deferred.List} contains non-blocking versions of many familiar List
     module functions. *)
 
 (******************************************************************************)
@@ -323,7 +334,7 @@ end
 (******************************************************************************)
 
 val try_with : (unit -> 'a Deferred.t) -> ('a,exn) Core.Std.Result.t Deferred.t
-(** [try_with f] runs the blocking function [f], and returns [Core.Std.Ok x] if
+(** [try_with f] runs the non-blocking function [f], and returns [Core.Std.Ok x] if
     [f ()] returns [x].  If [f ()] raises the exception [e], then [try_with f]
     returns [Core.Std.Error e]. *)
 
