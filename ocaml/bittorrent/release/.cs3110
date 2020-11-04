@@ -1,0 +1,4 @@
+compile.include_directories=apps,apps/word_count,apps/common_friends
+compile.ocaml_libraries=str
+compile.opam_packages=async,cryptokit,uri
+compile.thread=true
