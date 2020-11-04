@@ -1,0 +1,58 @@
+These are some good interpreter tests we should include on top of the general
+coverage:
+
+let rec efix f x f (efix f) x
+
+let len' f l = match l with | [] -> 0 | x::xs -> 1 + (f xs)
+let len = efix len'
+
+let lst_of_lsts = [[1]; [1;2]; [1;2;3]]
+
+let rev_map f l =
+  let rec rev_map_help l acc =
+    match l with
+      [] -> acc
+    | x::xs -> rev_map_help xs ((f x)::acc)
+  in
+  rev_map_help l []
+
+let should_be_int_not_alpha =
+  match (rev_map len lst_of_lsts) with
+    | x::x'::xs -> x'
+
+let f f x y z = (z (y) (x) (f y) (x (f y))) + 3 > 0
+
+let rec fold_left f accu l =
+  match l with
+    [] -> accu
+  | a::l -> fold_left f (f accu a) l
+
+let rec f x = if x = 0 then 0 else f (x-1)) in f 5
+
+let should_fail =
+  (* This should fail because h is bound several times *)
+  match [1;2;3] with
+    h::h::t -> h
+
+let f x = x in
+  let y l = match l with [] -> 0 | x::xs -> 1 in
+    f y
+
+(* Test partial application *)
+let sum l seed = match l with [] -> seed | h::t -> 1 + sum t in
+  let f = sum [1;2;3] in
+    f 5 + f 3 (* should be 14 *)
+
+let sum_i l =
+  match l with
+    [x;y]::z::[] -> x + y*2 + z*3
+
+let failing_match =
+  let questionable = (fun x ->
+    match x with
+      [h] -> h)
+  in questionable [1;2]
+
+let types_in_match l =
+  match l with
+    h::t -> (* make sure h is 'a and t is 'a list *)

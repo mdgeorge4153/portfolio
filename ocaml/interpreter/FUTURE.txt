@@ -1,0 +1,8 @@
+
+ - The parser does not support negative integer literals
+ - collect_case seems confusing to folks, maybe just remove it
+ - give them print_eqns
+ - pretty printer does not correctly parenthesize nested matches; try running
+   the output of print_expr lambda_test
+
+

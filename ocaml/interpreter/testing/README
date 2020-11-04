@@ -1,0 +1,9 @@
+Instructions for running these tests:
+
+* Run the harness with the cs3110-staff tool as normal
+
+* You need to replace sh with bash on your machine, because for some reason
+  these tests do not cooperate with sh:
+
+  $ sudo mv /bin/sh /bin/shit
+  $ sudo ln -s /bin/bash /bin/sh

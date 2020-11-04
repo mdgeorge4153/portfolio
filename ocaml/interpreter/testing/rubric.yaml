@@ -1,0 +1,115 @@
+# streams_test
+stream-unfold-nats: 1
+stream-unfold-3110strings: 1
+stream-repeat: 1
+stream-map-doubling: 1
+stream-map-casting: 1
+stream-diag-squares: 1
+stream-suffixes-nats: 1
+stream-interleave-nats: 1
+stream-fibs: 1
+stream-fibs-sanity: 1
+stream-pi: 1
+stream-pi-sanity: 1
+stream-lookandsay: 1
+# interpreter-tests
+interpreter-level  0 0: 1
+interpreter-level  0 1: 1
+interpreter-level  0 2: 1
+interpreter-level  0 3: 1
+interpreter-level  0 4: 1
+interpreter-level  0 5: 1
+interpreter-level  0 6: 1
+interpreter-level  0 7: 1
+interpreter-level  0 8: 1
+interpreter-level  0 9: 1
+interpreter-level  1 0: 1
+interpreter-level  1 1: 1
+interpreter-level  1 2: 1
+interpreter-level  1 3: 1
+interpreter-level  1 4: 1
+interpreter-level  1 5: 1
+interpreter-level  1 6: 1
+interpreter-level  1 7: 1
+interpreter-level  1 8: 1
+interpreter-level  1 9: 1
+interpreter-level  2 0: 1
+interpreter-level  2 1: 1
+interpreter-level  2 2: 1
+interpreter-level  2 3: 1
+interpreter-level  2 4: 1
+interpreter-level  2 5: 1
+interpreter-level  2 6: 1
+interpreter-level  2 7: 1
+interpreter-level  2 8: 1
+interpreter-level  2 9: 1
+interpreter-level  3 0: 1
+interpreter-level  3 1: 1
+interpreter-level  3 2: 1
+interpreter-level  3 3: 1
+interpreter-level  3 4: 1
+interpreter-level  3 5: 1
+interpreter-level  3 6: 1
+interpreter-level  3 7: 1
+interpreter-level  3 8: 1
+interpreter-level  3 9: 1
+interpreter-level  4 0: 1
+interpreter-level  4 1: 1
+interpreter-level  4 2: 1
+interpreter-level  4 3: 1
+interpreter-level  4 4: 1
+interpreter-level  4 5: 1
+interpreter-level  4 6: 1
+interpreter-level  4 7: 1
+interpreter-level  4 8: 1
+interpreter-level  4 9: 1
+interpreter-level  5 0: 1
+interpreter-level  5 1: 1
+interpreter-level  5 2: 1
+interpreter-level  5 3: 1
+interpreter-level  5 4: 1
+interpreter-level  5 5: 1
+interpreter-level  5 6: 1
+interpreter-level  5 7: 1
+interpreter-level  5 8: 1
+interpreter-level  5 9: 1
+interpreter-level  6 0: 1
+interpreter-level  6 1: 1
+interpreter-level  6 2: 1
+interpreter-level  6 3: 1
+interpreter-level  6 4: 1
+interpreter-level  6 5: 1
+interpreter-level  6 6: 1
+interpreter-level  6 7: 1
+interpreter-level  6 8: 1
+interpreter-level  6 9: 1
+interpreter-level  7 0: 1
+interpreter-level  7 1: 1
+interpreter-level  7 2: 1
+interpreter-level  7 3: 1
+interpreter-level  7 4: 1
+interpreter-level  7 5: 1
+interpreter-level  7 6: 1
+interpreter-level  7 7: 1
+interpreter-level  7 8: 1
+interpreter-level  7 9: 1
+interpreter-level  8 0: 1
+interpreter-level  8 1: 1
+interpreter-level  8 2: 1
+interpreter-level  8 3: 1
+interpreter-level  8 4: 1
+interpreter-level  8 5: 1
+interpreter-level  8 6: 1
+interpreter-level  8 7: 1
+interpreter-level  8 8: 1
+interpreter-level  8 9: 1
+interpreter-level  9 0: 1
+interpreter-level  9 1: 1
+interpreter-level  9 2: 1
+interpreter-level  9 3: 1
+interpreter-level  9 4: 1
+interpreter-level  9 5: 1
+interpreter-level  9 6: 1
+interpreter-level  9 7: 1
+interpreter-level  9 8: 1
+interpreter-level  9 9: 1
