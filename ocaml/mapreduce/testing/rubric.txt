@@ -1,0 +1,103 @@
+4 point rubric -
+  4 = perfect        (A range)
+  3 = minor mistakes (B range)
+  2 = major mistakes (C range)
+  1 = massive confusion
+  0 = blank
+
+2 point rubric -
+  2 = correct or close
+  1 = effort
+  0 = blank
+
+5a: logic
+---------
+
+1 (a) - (d) proof trees
+  4 points each
+
+  minor mistakes: things like using an admissable rule without making note,
+    substitution mistakes (even if they trickle through), manipulating
+    assumptions in a reasonable but informal way
+  major mistakes: unclear leaps, assumptions from nowhere, false subgoals
+  massive confusion: things like P ⊢ Q ⊢ R or a branch covering multiple
+    premises
+
+2 (a) partial correctness
+  (b) termination
+  4 points total
+
+3 (a) - (c) labeling proofs
+  4 points each
+
+total: 32
+scaled: 10
+
+5bI: async warmup
+-----------------
+
+warmups:
+1: fork
+  2 point rubric
+
+2: deferred_map
+  4 point rubric
+  major mistakes: correct output, incorrect synchrony
+
+3: queue
+  2 point rubric
+
+total: 8
+scaled: 10
+
+5bII: mapreduce
+---------------
+
+bulk of points: basic functioning
+ - e.g. wc runs
+ 8 points
+
+other criteria
+ - runs workers concurrently
+   4 point rubric
+
+ - adheres to connect/send string/send _multiple_ messages protocol
+   2 point rubric
+
+ - correctly handles failure
+    . connection / network failure
+      4 point rubric
+
+    . application failure
+      2 point rubric
+
+total: 20
+scaled: 40
+
+5bIII: apps
+-----------
+
+7: inverted index
+   2 point rubric
+
+8: dna
+   4 point rubric
+
+total: 6
+scale: 20
+
+5bIV: engineering
+-----------------
+
+git logs: 2 points
+design review: 2 points
+had a partner: 1 point
+
+total: 5
+scale: 5
+
+
+===========
+
+Grand Total: 85
+

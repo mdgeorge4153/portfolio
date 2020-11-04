@@ -1,0 +1,116 @@
+\section*{Logic}
+Formal logic is one of the most ubiquitous techniques in Computer Science for
+reasoning about various problem related to software including
+\begin{itemize}
+  \item \link{http://en.wikipedia.org/wiki/Formal_verification}{formal
+    verification of computer programs},
+\item
+  \link{http://en.wikipedia.org/wiki/Automated_theorem_proving}{automated
+    theorem proving},
+\item
+  \link{http://en.wikipedia.org/wiki/Intuitionistic_type_theory}{type
+    systems} and
+  \link{http://en.wikipedia.org/wiki/Formal_semantics_(logic)}{semantics
+    of programming languages}, and
+\item \link{http://en.wikipedia.org/wiki/Logic_programming}{logic
+    programming}.
+\end{itemize}
+Formal logic is also intimately tied to the theory of computation. In the
+following exercises you will be introduced to the fundamental
+techniques that underly all of the examples given above.
+
+\exercise{}
+
+In propositional logic, it is common to represent proofs and
+deductions as trees, and each additional rule that you apply serves as
+a new branch on the tree.
+
+\begin{note}{Note}
+  For reference, consider
+  \link{http://www.cs.cornell.edu/courses/cs3110/2008fa/recitations/rec_proof_strategy.pdf}{Dexter
+    Kozen's notes from Fall 2008} on logic trees.
+\end{note}
+
+For each of the following propositions, construct a tree to serve as a
+proof. In the 3110 LaTeX package, we have provided tools useful for
+typing up these proofs.
+
+\begin{itemize}
+\item \link{http://en.wikipedia.org/wiki/Peirce's_law}{Peirce's Law}:
+\[
+((P \Rightarrow Q) \Rightarrow P) \Rightarrow P
+\]
+
+\item Peirce's Law reformulated:
+\[
+P \Rightarrow (P \Rightarrow (Q \Rightarrow (Q \Rightarrow (P
+\Rightarrow P))))
+\]
+
+\item Introduction and Elimination forms for $\wedge$:
+\[
+((P \wedge Q) \Rightarrow R) \Longleftrightarrow (P \Rightarrow (Q
+\Rightarrow R))
+\]
+
+\begin{note}{Note}To prove a bidirectional statement, you must prove
+  it for both directions (i.e. if you are proving $A
+  \Longleftrightarrow B$, you must prove both $A \Rightarrow B$ and $B
+  \Rightarrow A$).
+\end{note}
+
+\end{itemize}
+
+\exercise{}
+
+The following proof contains an error. Find and correct the error so
+that the proof is correct.
+
+Let
+\begin{itemize}
+  \item $S(d) : $ There is a blizzard in Ithaca on day $d$
+  \item $C : $ Cornell's classes are cancelled
+  \item $H : $ Cornell Students are happy
+\end{itemize}
+
+Given:
+\begin{itemize}
+  \item $\forall d\ S(d)\Rightarrow C$
+  \item $C\Rightarrow H$
+  \item $\neg H$
+\end{itemize}
+
+\begin{prooftree}
+    \AxiomC{$\neg H$}
+            \AxiomC{$(\forall d $ $ S(d) \rightarrow C) \wedge (C \rightarrow H)$}
+                    \AxiomC{$((p \rightarrow q) \wedge (q \rightarrow r)) \rightarrow (p \rightarrow r))$}
+            \BinaryInfC{$\forall d$ $ S(d) \rightarrow H$}
+                    \AxiomC{$(p \rightarrow q) \rightarrow (\neg q \rightarrow \neg p)$}
+                \BinaryInfC{$\neg H \rightarrow \forall d$ $ \neg S(d)$}
+        \BinaryInfC{$\forall d$ $ \neg S(d)$}
+\end{prooftree}
+
+\exercise{}
+
+A \emph{first-order language} or \emph{model} is specified by the
+following data:
+\begin{itemize}
+\item an underlying set $\mathcal{D}$, called the \emph{domain} or
+  \emph{carrier set}, and
+\item a set $\mathcal{S}$ of function symbols, $\sigma$, and their
+  corresponding arities $a_\sigma$.
+\end{itemize}
+
+Give a first-order language and a set of axioms to formalize the
+\emph{graph coloring problem}:
+
+\setlength{\fboxsep}{10pt}
+\setlength{\fboxrule}{0pt}
+\begin{center}
+\fbox{
+  \begin{minipage}{0.6\textwidth}
+    Given a bounded-degree graph $G$ and a set of colors $C$, associate a
+    color to each of its nodes such that no pair of adjacent nodes have
+    the same color.
+  \end{minipage}}
+\end{center}

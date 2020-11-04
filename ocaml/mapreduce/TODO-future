@@ -1,0 +1,14 @@
+Here are things we should change for next semester that would break things this
+semester.
+
+ - change Marshalable to Message, change Marshallable.t to message
+ - think about protocol that allows concurrency within workers
+ - explicitly tell them to implement do_map in the controller.
+ - make sure the apps have a function that we can call for testing!
+
+
+Other ideas for a future run:
+
+ - a "batching" app-functor; a thin wrapper around the app that batches n
+   requests together.
+

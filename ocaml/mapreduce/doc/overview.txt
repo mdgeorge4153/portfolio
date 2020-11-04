@@ -1,0 +1,80 @@
+Note: we are not using this design this semester (2014sp) but we may in the
+future.
+
+Jianneng and I just had another design discussion for this.  Here is an
+overview of the protocol and system architecture we've tentatively settled on.
+
+Both the reducers and mappers will send periodic heartbeats back to the
+controller.  We will provide Deferreds to the students that they can use to
+detect failures.  During normal operation, the controller will send work to
+mappers, who will map and partition and send the intermediate values to the
+reducers.  The reducers will send acks back to the mappers.  When the mappers
+have received all of their acks, they will send an ack back to the controller.
+When the controller has received acks for all of the input data, it will begin
+the reduce phase.
+
+At the beginning of the reduce phase, the controller will send messages to all
+of the reducers.  The reducers will then know that they have received all of
+their data, so they will do the reduce phase and send the results back to the
+controller.  When the controller has received all results, it will notify all
+mappers and reducers that the computation is over, and return the results to
+the caller.
+
+We will consider application failures to be actual failures; if the app throws
+an exception, the controller should throw that exception back to the caller.
+
+There are a few kinds of infrastructure failures: mappers can go down, or
+reducers can go down (if the controller goes down, we just call the whole thing
+off).  If a mapper goes down during any phase, the controller will redistribute
+its jobs to other mappers.  If a reducer goes down, the work that had been
+assigned to that reducer must be repartitioned.  The controller will send a
+repartition request to all mappers, who will redistribute whatever work had
+been assigned to the failed reducer and then send an ack to the controller.
+When it has received all repartition acks, it will notify the reducers to
+commence the repartitioned work.
+
+Note that this means the mappers must remember their intermediate results so
+that they can resend them if necessary; they should be purged when the shutdown
+message is received.
+
+Here is a summary of the workflow for each of the participants:
+
+Controller:
+--------------
+0 [maybe] send app code to mappers.  It might be easier to either just link the
+  apps in statically, or to completely decouple the initialization.
+
+1. Send map requests to mappers
+2. Wait for the following events:
+ - mapper fails: resend the data that that mapper was working on to other
+   mappers.  If there are no mappers left, the application fails.
+ - reducer fails: send repartition messages to all mappers.  again, fail the
+   app if no reducers left.
+ - all mappers ack: move onto the reduce phase
+3. reduce phase: send start messages to remaining reducers.  Wait for the
+   following events:
+ - mapper fails: resend that mapper's data
+ - reducer fails: send repartition messages to all mappers
+ - all living reducers send results: initiate cleanup
+4. cleanup phase: send job finish messages to all mappers.  return results.
+
+Mapper:
+----------
+1. On a map request:
+ - call the map function
+ - save the output, partitioned by the app's partition function
+ - send the output to the reducers
+ - send an ack to the controller.
+2. On a repartition request (for failed partitioner R)
+ - repartition R's data across the remaining reducers and send it
+ - send an ack to the controller
+3. On cleanup:
+ - remove all of the data associated with the job.
+
+Reducer:
+------------
+1. On a reduce request (from the mapper)
+ - store the data
+2. On a start reduce message (from the controller)
+ - call reduce
+ - send the results back

@@ -1,0 +1,209 @@
+\documentclass{pset}
+
+\usepackage{bussproofs}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+\usetikzlibrary{calc}
+\usetikzlibrary{decorations}
+\usetikzlibrary{decorations.pathreplacing}
+\usetikzlibrary{arrows}
+
+\newcommand{\TODO}[1][fix]{\textbf{[TODO --- #1]}}
+
+\psnum{5a}
+\date{Thursday, April 17}
+\versionnumber{2}
+
+\begin{document}
+\maketitle{}
+
+\section*{Overview}
+
+In this assignment you will explore using logic to express and prove
+formal properties.
+
+\section*{Objectives}
+
+This short assignment is designed to help you learn the following
+skills:
+\begin{itemize}
+\item Expressing intuitive properties using formal logic
+\item Understanding partial correctness specifications
+\item Developing proofs using natural deduction
+\end{itemize}
+
+\section*{Recommended Reading}
+
+\begin{itemize}
+\item Lectures 14, 15, and 16
+\item Recitations 14 and 15
+\end{itemize}
+
+\section*{What to turn in}
+You should submit your solutions in a single file
+\filename{logic.pdf}. Any comments you wish to make can go in
+\filename{comments.txt} or \filename{comments.pdf}. If you choose to
+submit any Karma work, you may submit the file \filename{karma.pdf}
+(be sure to describe what you've done in the comments file).
+
+\newpage{}
+
+\exercise{}
+
+Construct a proof tree for each of the following formulas:
+
+\begin{enumerate}[(a)]
+\item $P \wedge Q \Longrightarrow Q \wedge P$
+\item $(P \wedge Q \Longrightarrow R) \Longrightarrow (P \Longrightarrow (Q \Longrightarrow R))$
+\item $(P \vee Q \Longrightarrow R) \Longrightarrow (P \Longrightarrow R) \wedge (Q \Longrightarrow R)$
+\item $\exists x.\, \neg P(x) \Longrightarrow \neg(\forall x.\, P(x))$
+\end{enumerate}
+
+\vfill{}
+
+\exercise{}
+
+Consider the following OCaml code:
+
+\begin{ocaml}
+(* pre: ??? 
+ * post: nth [v0;...;vi;...;vn] i returns vi 
+*)
+let rec nth (l:'a list) (i:int) = 
+  match i,l with 
+   | _,[] -> 
+     failwith "empty list"
+   | i,_ when i < 0 -> 
+     failwith "negative index"
+   | 0,h::_ -> 
+     h
+   | _,_::t -> 
+     nth t (i - 1)
+\end{ocaml}
+
+\begin{enumerate}[(a)]
+\item Write a precondition that, when combined with the stated
+  postcondition, yields a valid partial correctness specification for
+  \code{nth}. For full credit, your precondition should impose as few
+  constraints on the input as possible.
+
+\item Define a mapping $f$ from \code{nth}'s inputs \code{(l,i)} to
+  the natural numbers and briefly argue that this number decreases on
+  each recursive call.
+\end{enumerate}
+
+\vfill{}
+
+\newpage 
+
+\exercise{} The following proofs are all incorrect. For each proof,
+give the names of valid instances of axioms and inference rules and
+write ``Bogus'' for invalid instances of axioms and inferences
+rules. For example, given the following (non)-proof, 
+%
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{(1)}
+\UnaryInfC{$P \vdash P$}
+\AxiomC{}
+\RightLabel{(2)}
+\UnaryInfC{$P\vdash Q$}
+\RightLabel{(3)}
+\BinaryInfC{$P \vdash P \wedge Q$}
+\RightLabel{(4)}
+\UnaryInfC{$\vdash P \Longrightarrow P \wedge Q$}
+\end{prooftree}
+%
+you would write:
+%
+\begin{enumerate}[(1)]
+\item Assumption
+\item Bogus
+\item $\wedge$-introduction
+\item $\Longrightarrow$-introduction
+\end{enumerate}
+
+\begin{enumerate}[(a)]
+\item 
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{(1)}
+\UnaryInfC{$P \vee Q \vdash P$}
+\AxiomC{}
+\RightLabel{(2)}
+\UnaryInfC{$P \vee Q \vdash Q$}
+\RightLabel{(3)}
+\BinaryInfC{$P \vee Q \vdash P \wedge Q$}
+\RightLabel{(4)}
+\UnaryInfC{$\vdash P \vee Q \Longrightarrow P \wedge Q$}
+\end{prooftree}
+
+\vfill{}
+
+\item 
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{(1)}
+\UnaryInfC{$P \vdash P$}
+\AxiomC{}
+\RightLabel{(2)}
+\UnaryInfC{$P \vdash P$}
+\RightLabel{(3)}
+\AxiomC{}
+\UnaryInfC{$P \vdash P \Longrightarrow \bot$}
+\RightLabel{(4)}
+\BinaryInfC{$P \vdash \bot$}
+\RightLabel{(5)}
+\UnaryInfC{$P \vdash \neg P$}
+\RightLabel{(6)}
+\BinaryInfC{$\vdash P \Longrightarrow P \wedge \neg P$}
+\end{prooftree}
+
+\vfill{}
+
+\item 
+\begin{prooftree}
+\AxiomC{}
+\RightLabel{(1)}
+\UnaryInfC{$\exists x.\, P(x) \vdash \exists x.\, P(x)$}
+\AxiomC{}
+\RightLabel{(2)}
+\UnaryInfC{$\exists x.\, P(x), P(a) \vdash P(a)$}
+\RightLabel{(3)}
+\UnaryInfC{$\exists x.\, P(x), P(a) \vdash \forall x.\, P(x)$}
+\RightLabel{(4)}
+\UnaryInfC{$\exists x.\, P(x) \vdash P(a) \Longrightarrow \forall x.\, P(x)$}
+\RightLabel{(5)}
+\BinaryInfC{$\exists x.\, P(x)\vdash \forall x.\, P(x)$}
+\RightLabel{(6)}
+\UnaryInfC{$\vdash \exists x.\, P(x) \Longrightarrow \forall x.\, P(x)$}
+\end{prooftree}
+
+\end{enumerate}
+
+\vfill{}
+
+\newpage
+\section*{Karma suggestions}
+
+\begin{itemize}
+\item Prove $(P \Longrightarrow (Q \Longrightarrow R)) \Longrightarrow (P \wedge Q \Longrightarrow R)$
+
+\item Prove $(P \Longrightarrow R) \wedge (Q \Longrightarrow R) \Longrightarrow (P \vee Q \Longrightarrow R)$
+
+\item Prove that your precondition for  \code{nth} yields a valid partial correctness specification.
+
+\item Prove that your precondition for  \code{nth} yields a valid total correctness specification.
+
+\end{itemize}
+
+\section*{Comments}
+
+We would like to know how this assignment went for you.  Were there
+any parts that you didn't finish or wish you had done in a better way?
+Which parts were particularly fun or interesting?  Did you do any
+Karma problems?
+
+\end{document}
+
