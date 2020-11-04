@@ -1,0 +1,15 @@
+[submodule "ocaml/sorts"]
+	path = ocaml/sorts
+	url = https://github.com/mdgeorge4153/sorts.git
+[submodule "c/lfs"]
+	path = c/lfs
+	url = https://github.com/mdgeorge4153/lfs.git
+[submodule "js/stars"]
+	path = js/stars
+	url = https://github.com/mdgeorge4153/stars.git
+[submodule "java/fabric"]
+	path = java/fabric
+	url = https://github.com/apl-cornell/fabric.git
+[submodule "java/jalgebra"]
+	path = java/jalgebra
+	url = https://github.com/mdgeorge4153/jalgebra.git
