@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+<body>
+<h1 id="project-5-five-in-a-row">Project 5: Five in a row</h1>
+<h2 id="changes">Changes</h2>
+<ul>
+<li>10/21: src/controller/Controller.java line 32: changed g.submitMove(me,nextMove(g)) to g.submitMove(me,move)</li>
+</ul>
+<h2 id="overview">Overview</h2>
+<p>In this project you will create a GUI and an artificial intelligence for a simple two-player game called <strong>Five in a Row</strong>.</p>
+<p><a href="https://en.wikipedia.org/wiki/Gomoku">Five in a Row</a> is a generalization of <a href="https://en.wikipedia.org/wiki/Tic-tac-toe">Tic Tac Toe</a> that is played on a much larger grid. It requires players to get five marks in a row (instead of three) to win.</p>
+<p>A game of five in a row is played on an NxN grid (N is 9 by default in our release code). Players take turns placing their mark (an X or an O) in an empty square. A Player wins by placing five consecutive marks in any row, column, or diagonal.</p>
+<p><strong>Note</strong>: This is a large project. Get started early.</p>
+<h2 id="learning-objectives">Learning objectives</h2>
+<p>This project is designed to help you learn the following skills:</p>
+<ul>
+<li><p>Working with a larger codebase than previous projects</p></li>
+<li><p>Using some of the tools and design patterns that help manage larger projects. Specifically, you will use packages, the Model-View-Controller paradigm, and the Observer design pattern.</p></li>
+<li><p>Designing and building GUIs.</p></li>
+<li><p>Understanding the advantages and disadvantages of various stylistic decisions.</p></li>
+</ul>
+<h2 id="what-we-provide">What we provide</h2>
+<p>To get you started, we have provided a working implementation of five in a row that can be played on the console. You can play the game by running clui.Main.</p>
+<p>The code is organized into several packages:</p>
+<ul>
+<li><p><strong><code>model</code></strong>: this package contains all of the data structures used to model the state of the game and for processing the rules of the game.</p></li>
+<li><p><strong><code>clui</code> (Command Line User Interface)</strong>: this package contains the command-line user interface. The classes in this package interact with the user on the command line. The CLUI repeatedly displays a model.Game object on the command line, queries the user for their moves, and uses those moves to update the model.Game.</p></li>
+<li><p><strong><code>gui</code> (Graphical User Interface):</strong> this package is empty! You will implement gui.Main to interact with the user using a graphical user interface.</p></li>
+<li><p><strong><code>controller</code>:</strong> there are several strategies for selecting the next move for a given player. Moves can be provided by the user, either through the command line or through the gui. They might also be randomly generated, or be provided by an intelligent algorithm. These different sources of moves are represented by Controller objects; the controller package contains class Controller, as well as the algorithmic controllers. Controllers that take input from the GUI or CLUI are contained in the gui and clui packages.</p></li>
+</ul>
+<p>The <a href="javadoc/index.html">javadoc documentation</a> for the provided code (in the doc/ directory) provides much more detail on the internal structure of these packages. You should read it after reading this document.</p>
+<h3 id="the-model-view-controller-pattern">The Model-View-Controller Pattern</h3>
+<p>Systems that interact with users are often separated into separate &quot;model&quot;, &quot;view&quot;, and &quot;controller&quot; components, as we have done in this project. Splitting the code up this way increases the system's flexibility:</p>
+<ul>
+<li><p>the model can be reused by different programs that manipulate data in the same problem domain (for example, the model code could be used to write a program that searches for optimal strategies)</p></li>
+<li><p>multiple view and controller objects can be mixed and matched to create a large variety of interfaces with a small amount of code.</p></li>
+</ul>
+<p>This organization is referred to as the <a href="https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller">model-view-controller (MVC) pattern</a>.</p>
+<h3 id="the-observer-pattern">The Observer Pattern</h3>
+<p>Swing uses <code>ActionListener</code>s (and other Listeners) to connect general-purpose components (like <code>JButton</code>s) to the specific programs that react to them. The provided code also uses a similar idea: Game objects contain lists of GameListeners, which are notified whenever the game changes.</p>
+<p>This design pattern is very common: it is referred to as the <a href="https://en.wikipedia.org/wiki/Observer_pattern">Observer pattern</a>. The observer pattern makes code simpler and more flexible: The observed object (the <code>Game</code> or the <code>JButton</code>) does not have to know about how it will be used. For example, the five-in-a-row model code does not refer directly to the clui or gui classes. As another example, the swing library does not need to refer to the application code defining the action to take when the button is pressed.</p>
+<h2 id="what-you-must-do">What you must do</h2>
+<ol start="0" style="list-style-type: decimal">
+<li><p>Download the <a href="a5release.zip">provided code</a> and unpack it. Load it into eclipse, either by placing the release folder in your workspace, or by selecting &quot;Open Project From Filesystem&quot; from the &quot;File&quot; menu. Run <code>gui.Main</code> to play a game of Five in a Row at the console.</p></li>
+<li><p>Read the <a href="javadoc/index.html">javadoc documentation</a> for the provided code. <strong>Do not</strong> start by reading the provided code: when working in large projects, you will quickly become overwhelmed if you try to understand <em>how</em> each component works; instead, you should focus on <em>what</em> each component does. The <em>what</em> is described concisely in the javadoc, while the <em>how</em> is described in the code.</p></li>
+<li><p>Implement <code>controller.DumbAI</code>, as specified in the javadoc.</p></li>
+<li><p>Implement <code>gui.Main</code>. Your GUI should satisfy the following minimum requirements:</p></li>
+</ol>
+<ul>
+<li><p>The GUI can be invoked by running <code>gui.Main</code> with no additional arguments</p></li>
+<li><p>The user can play the game without interacting with the command line.</p></li>
+<li><p>The game can be played by any combination of human players, <code>DumbAI</code> players, <code>RandomAI</code> players, and <code>SmartAI</code> players. For example, it should be possible to have X's played by a human and O's by a <code>RandomAI</code>, or to have X's and O's both played by humans, or to have X's played by a <code>RandomAI</code> and O's playe by a <code>SmartAI</code>.</p></li>
+<li><p>The GUI should not interfere with the CLUI; The behavior of <code>clui.Main</code> should be unchanged.</p></li>
+<li><p>The GUI clearly indicates the state of the game: whether one player or the other has won, and if not, whose turn it is.</p></li>
+</ul>
+<p>Subject to these requirements, you are free to implement the GUI however you see fit.</p>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Implement <code>controller.MinMaxAI</code>, as specified in the javadoc. <code>SmartAI</code> is a subclass of <code>MinMaxAI</code>, so it won't work until you complete <code>MinMaxAI</code>.</p></li>
+<li><p>Write a file called <code>README.txt</code> or <code>README.pdf</code> containing:</p></li>
+</ol>
+<ul>
+<li><p>The names and netIDs of all group members</p></li>
+<li><p>Instructions for interacting with your GUI</p></li>
+<li><p>Any known bugs or shortcomings in your submission</p></li>
+<li><p>Any additional design or implementation notes that you think are interesting</p></li>
+<li><p>Feedback to help us improve the assignment for the future</p></li>
+</ul>
+<ol start="6" style="list-style-type: decimal">
+<li><p>Update the comment on line 1 of <code>gui.Main</code> to indicate the amount of time spent on the project.</p></li>
+<li><p>Submit a file <code>a5.zip</code> containing your entire project.</p></li>
+</ol>
+<p>You can check that your code is complete by asking eclipse to show you what refers to <code>NotImplementedException</code> (right click on NotImplementedException in the package explorer, and select References / Project). If nothing throws <code>NotImplementedException</code>, then you've probably implemented everything!</p>
+<h2 id="interesting-research-directions">Interesting research directions</h2>
+<p>There are several interesting directions for further exploration on this project. We list a few ideas here. These are <strong>not required</strong> and will <strong>not</strong> be graded, but they are good learning experiences.</p>
+<ul>
+<li><p>Experiment with different AI heuristics</p></li>
+<li><p>Consider additional controllers. For example, you could write a controller that reads moves from a file, or even one that plays over the network.</p></li>
+<li><p>Many standard object-oriented design patterns can be applied to this project; We have already introduced the MVC paradigm and the Observer pattern. The visitor pattern is another good one to learn; you can apply it to <code>game.Board.State</code> to improve the safety of the code.</p></li>
+<li><p>Modify the code so that the size of the game board and the number of squares in a line needed to win can be selected at run time.</p></li>
+<li><p>Use reflection to make it possible to install new <code>Controller</code>s without modifying the code.</p></li>
+<li><p>Use Swing's accessibility tools to make your GUI work well with assistive technology for users with disabilities.</p></li>
+<li><p>Use Swing's internationalization tools to make your GUI work in multiple languages.</p></li>
+</ul>
+<p>If you do explore these avenues, mention it in your README, and make sure it does not interfere with the correct functioning of your program!</p>
+<h2 id="note-on-style">Note on style</h2>
+<p>The release code is occasionally slightly more verbose than the code you are used to seeing. This is deliberate: sometimes saying something explicitly can make your code easier to understand, while at other times it adds complexity.</p>
+<p>For example, this code often uses complete words instead of single letters for method arguments. Why is this? When writing small programs, the primary audience for your code are those who are looking directly at it. Those readers have the method spec directly in their field of vision, so they can clearly see what each argument is.</p>
+<p>When writing large programs, on the other hand, the readers are likely to be looking at a different piece of code while interacting with yours. For example, they may be using eclipse's autocomplete to fill in the arguments to the method. Those readers will see the argument names without seeing the method specification; by giving longer names to the variables, we put more information at the fingertips of those readers.</p>
+<p>Similarly, the provided code tends to use <code>this.f</code> instead of just <code>f</code> more frequently than you are used to. When looking at a small program, it is easy to process the inside-out and bottom-up rules in your head to find out where a variable is declared. However, as the complexity of the code becomes larger, the extra hint that <code>f</code> is a field makes the reader's job easier. There is a tradeoff if the code becomes very dense; effort has been made to keep the code simple enough that the notational clutter does not become distracting; where it is, it has been elided.</p>
+<p>What should you do? The most important thing is that you <strong>think</strong> about each stylistic decision you make. Think about who the audience for that code is, and what will make your program most readable to them. Thinking about how to make your code as easy to read as possible is the essence of good style.</p>
+<p>Another example: there are tradeoffs between different style guidelins. For example, the following method declaration:</p>
+<pre><code>private Board makeBoard(@NonNull Board other, @NonNull Location locToChange, @NonNull Player p) throws IllegalStateException, IllegalArgumentException {</code></pre>
+<p>this code is hard to read because it (badly) violates the line length requirement. A reader with a small screen is likely to see</p>
+<pre><code>    private Board makeBoard(@NonNull Board other, @NonNull Location locToChange,</code></pre>
+<p>and be very confused. However, splitting it onto multiple lines yields:</p>
+<pre><code>    private Board makeBoard(@NonNull Board other, @NonNull Location locToChange,
+        @NonNull Player p)
+        throws IllegalStateException, IllegalArgumentException {
+        int x = 0;
+        int y = 0;
+        ...</code></pre>
+<p>This is very hard to read because it's not at all clear where the declaration ends and the body begins. Here is a better solution:</p>
+<pre><code>    private Board makeBoard(@NonNull Board other,
+                            @NonNull Location locToChange,
+                            @NonNull Player p)
+            throws IllegalStateException, IllegalArgumentException
+    {
+        int x = 0;
+        int y = 0;
+        ...</code></pre>
+<p>A reader scanning this has a very clear visual separation between the arguments, exceptions, and method body. Of course, complicated methods should be avoided wherever possible, but sometimes you need them.</p>
+</body>
+</html>
