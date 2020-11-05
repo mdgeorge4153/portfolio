@@ -1,0 +1,13 @@
+ - Testing is a bit hard; API tweaks that would make it easier:
+     - Controller.nextMove(Game) -> nextMove(Board)
+     - Game constructor that takes a Board
+
+ - Students keep trying to make a HumanController which is a bad idea
+
+ - MinMax specification is a bit murky
+
+ - MinMax has too many players floating around.  Perhaps not make it implement
+   controller.
+
+ - Consider giving them TreeAI
+
