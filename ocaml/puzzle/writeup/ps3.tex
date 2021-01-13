@@ -322,12 +322,12 @@ command-line in the virtual machine:
 \tikzstyle{inv}=[below,sloped]
 
 
-\newcommand{\pic}[2]{\includegraphics[width=#1]{images/tile#2.png}}
+\newcommand{\tilepicture}[2]{\includegraphics[width=#1]{images/tile#2.png}}
 
-\node[state] (init) at ( 0, 0) {\pic{1.5cm}{}};
-\node[state] (n)    at ( 0, 4) {\pic{1.5cm}{N}};
-\node[state] (e)    at ( 4, 0) {\pic{1.5cm}{E}};
-\node[state] (en)    at ( 4, 4) {\pic{1.5cm}{EN}};
+\node[state] (init) at ( 0, 0) {\tilepicture{1.5cm}{}};
+\node[state] (n)    at ( 0, 4) {\tilepicture{1.5cm}{N}};
+\node[state] (e)    at ( 4, 0) {\tilepicture{1.5cm}{E}};
+\node[state] (en)    at ( 4, 4) {\tilepicture{1.5cm}{EN}};
 
 %% \node[state] (ne)   at ( 5.5, 2) {\pic{.75cm}{NE}};
 %% \node[state] (nn)   at ( 5.5,-2) {\pic{.75cm}{NN}};
@@ -342,7 +342,7 @@ command-line in the virtual machine:
 %% \node (nes) at (7.5, 0) {$\cdots$};
 %% \node (nne) at (7.5, -2) {$\cdots$};
 
-\node[state] (sol) at (10, 0) {\pic{1.5cm}{sol}};
+\node[state] (sol) at (10, 0) {\tilepicture{1.5cm}{sol}};
 
 \node[above] at (0,-1.5) {\textit{initial state}};
 \node[above] at (10,-1.5)  {\textit{final state}};
