@@ -24,28 +24,34 @@ detail below.
    arithmetic, and computational geometry to implement a novel drag-and-drop
    algorithm.
 
- * `ocaml/interpreter`: an interpreter implementation project for a subset of
-   OCaml, including type inference.
+ * [`ocaml/interpreter`](#interpreter):
+   an interpreter implementation project for a subset of OCaml, including type
+   inference.
 
- * `ocaml/mapreduce`: an implementation of a distributed map/reduce platform
-   using Async.
+ * [`ocaml/mapreduce`](#mapreduce):
+   an implementation of a distributed map/reduce platform using Async.
 
- * `java/fiveinrow`: a tic-tac-toe like game, intended to be students' first
-   project with multiple high-level components.
+ * [`java/fiveinrow`](#fiveinrow):
+   a tic-tac-toe like game, intended to be students' first "large" project with
+   multiple high-level components.
 
- * `c/lfs`: a project to demonstrate the layout and operation of a log-structured
+ * [`c/lfs`](#lfs):
+   a project to demonstrate the layout and operation of a log-structured
    filesystem.  Also serves as a demo for memory-mapped I/O and segmentation.
 
 ### Personal open-source experiments:
 
- * `js/jamcircle`: a prototype videoconferencing application designed for
-   playing music together.
+ * [`js/jamcircle`](#jamcircle):
+   a prototype videoconferencing application designed for playing music
+   together.
 
- * `java/jalgebra`: an exploration of an unusual design pattern for
-   object-oriented number classes, including a custom annotation processor to
-   support quickcheck-like testing.
+ * [`java/jalgebra`](#jalgebra):
+   an exploration of an unusual design pattern for object-oriented number
+   classes, including a custom annotation processor to support quickcheck-like
+   testing.
 
- * `ocaml/sorts`: a monadic framework for animating in-place sorting algorithms.
+ * [`ocaml/sorts`](#sorts):
+   a monadic framework for animating in-place sorting algorithms.
 
 
 Projects developed for courses
@@ -68,8 +74,8 @@ teamwork. I also think it's important for students to be involved in enough of
 each project that they can appreciate how the parts fit together, and the
 advantages of good software design.
 
-Tangrams (CS 3110 Functional Programming, `ocaml/tangrams`)
------------------------------------------------------------
+Tangrams (CS 3110 Functional Programming, `ocaml/tangrams`) <a id="tangrams"></a>
+---------------------------------------------------------------------------------
 
 This is a large project focusing on modular software design.  The students had
 to provide several implementations of a hierarchy of numeric interfaces, and
@@ -85,8 +91,8 @@ interface (using an interface design that I invented) that makes use of the
 arbitrary precision arithmetic implemented by the students.
 
 
-OCalf interpreter (CS 3110 Functional programming, `ocaml/interpreter`)
------------------------------------------------------------------------
+OCalf interpreter (CS 3110 Functional programming, `ocaml/interpreter`) <a id="interpreter"></a>
+------------------------------------------------------------------------------------------------
 
 An interpreter is a staple of a functional programming course.  I redesigned
 the CS 3110 interpreter project, changing it from an untyped scheme-like
@@ -102,8 +108,8 @@ seem ancillary, I think that providing good tooling to the students really
 streamlined their experience and let them focus on the interesting problems.
 
 
-MapReduce (CS 3110 Functional programming, `ocaml/mapreduce`)
--------------------------------------------------------------
+MapReduce (CS 3110 Functional programming, `ocaml/mapreduce`) <a id="mapreduce"></a>
+------------------------------------------------------------------------------------
 
 For historical reasons, Cornell's functional programming course (CS 3110) used
 to cover concurrent programming with threads and monitors.  This was never a
@@ -123,8 +129,8 @@ project, I developed a more focused set of OCamldoc documentation for the parts
 of the library that the students needed to interact with (see `doc/async.mli`).
 
 
-Five in a row (CS 2110 Object oriented programming, `java/fiveinrow`)
----------------------------------------------------------------------
+Five in a row (CS 2110 Object oriented programming, `java/fiveinrow`) <a id="fiveinrow"></a>
+--------------------------------------------------------------------------------------------
 
 This project was given midway through the object-oriented programming course,
 to help the students move from focusing on the semantics of objects and the
@@ -134,8 +140,8 @@ Model/View/Controller.  It also shows students the value of programming against
 an interface by having them implement the same interface in multiple ways.
 
 
-Log-structured Filesystem (CS 4410 Operating Systems, `c/lfs`)
---------------------------------------------------------------
+Log-structured Filesystem (CS 4410 Operating Systems, `c/lfs`) <a id="lfs"></a>
+-------------------------------------------------------------------------------
 
 Cornell's OS course has traditionally had a userspace log-structured filesystem
 implementation project, but the source code is written in python, and there's a
@@ -154,8 +160,8 @@ the code to the students as a study guide and an example of using memory mapped
 I/O and memory segmentation.
 
 
-Graduate Research Project (`java/fabric`)
-=========================================
+Graduate Research Project (`java/fabric`) <a id="fabric"></a>
+=============================================================
 
 Most of my graduate research was conducted in the context of the Fabric
 project.  I was one of four lead developrs of the Fabric language and system.
@@ -200,8 +206,8 @@ They are less complete and less polished than the professional projects above,
 but they give some idea of the things I'm interested in and my approach to
 exploration.
 
-JamCircle (`js/jamcircle`)
---------------------------
+JamCircle (`js/jamcircle`) <a id="jamcircle"></a>
+-------------------------------------------------
 
 One of the things I miss from before the pandemic is being able to play my
 fiddle with friends.  Standard videoconferencing software is unacceptable for
@@ -229,8 +235,8 @@ But it's a neat project, and it's what I'm working on right now, so I decided
 to include it.
 
 
-Sorts (`ocaml/sorts`)
----------------------
+Sorts (`ocaml/sorts`) <a id="sorts"></a>
+----------------------------------------
 
 When I took my first computer science class in middle school and learned about
 sorting algorithms, the instructor showed us a demo that animated several
@@ -246,8 +252,8 @@ algorithms in an imperative style, and allows running them in an animated
 fashion.
 
 
-JAlgebra (`java/jalgebra`)
---------------------------
+JAlgebra (`java/jalgebra`) <a id="jalgebra"></a>
+------------------------------------------------
 
 The drag-and-drop algorithm contained in the tangrams project described above
 is interesting because any rounding error will quickly become noticable -- it is
