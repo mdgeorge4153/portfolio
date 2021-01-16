@@ -1,3 +1,0 @@
-compile.ocaml_libraries=str
-compile.opam_packages=sdl,sdl.sdlimage,sdl.sdlttf,lablgl,lablgl.glut
-compile.thread=true
