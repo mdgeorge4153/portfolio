@@ -74,8 +74,9 @@ teamwork. I also think it's important for students to be involved in enough of
 each project that they can appreciate how the parts fit together, and the
 advantages of good software design.
 
-Tangrams (CS 3110 Functional Programming, `ocaml/tangrams`) <a id="tangrams"></a>
----------------------------------------------------------------------------------
+<a id="tangrams"></a>
+[Tangrams (CS 3110 Functional Programming)](ocaml/tangrams)
+-----------------------------------------------------------
 
 This is a large project focusing on modular software design.  The students had
 to provide several implementations of a hierarchy of numeric interfaces, and
