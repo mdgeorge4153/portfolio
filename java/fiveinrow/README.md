@@ -2,10 +2,11 @@ This is a programming project developed for CS 2110.  Students learn some
 basics of designing nontrivial programs, develop a GUI, and different AI player
 heuristics.
 
-The students were provided with the files in the `release/` directory (as well
-as generated javadocs for those files, and a generated HTML version of the
-writeup in `writeup/writeup.md`).  If you have make, pandoc, and javadoc installed,
-you can build the release zip file by running `make` in the `writeup` directory.
+The students were provided with the files in the `release/` directory.  We also
+posted generated versions of the documentation, which you can see
+ [here](https://www.cs.cornell.edu/courses/cs2110/2016fa/assignments.html).
+If you have make, pandoc, and javadoc installed, you can build the release zip
+file by running `make` in the `writeup` directory.
 
 Students in the class work within the eclipse development environment; the
 release directory contains eclipse project files that they can load directly

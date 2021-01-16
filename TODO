@@ -1,6 +1,16 @@
 
-* finish main README
 * make sure it is clear how to build and run everything, where docs are, etc.
 * mapreduce writeup seems to be an old version
 
+[X] java/fabric
+[ ] ocaml/tangrams
+[ ] ocaml/interpreter
+[ ] ocaml/mapreduce
+[X] java/fiveinrow
+     - nuke the zip file (mdg39-sol.zip)
+     - build/run script
+[X] c/lfs
+[ ] js/jamcircle
+[ ] java/jalgebra
+[ ] ocaml/sorts
 
