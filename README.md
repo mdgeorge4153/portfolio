@@ -13,20 +13,22 @@ detail below.
 
 ### Large research projects:
 
- * `java/fabric`: an extension of Java with language-level support for
-   distributed computing, mobile code, and strong information flow control.
+ * [`java/fabric`](#fabric):
+   an extension of Java with language-level support for distributed computing,
+   mobile code, and strong information flow control.
 
 ### Projects developed for students:
 
- * `ocaml/tangrams`: a project that brings together modular software design,
-   arbitrary-precision arithmetic, and computational geometry to implement a
-   novel drag-and-drop algorithm.
+ * [`ocaml/tangrams`](#tangrams):
+   a project that brings together modular software design, arbitrary-precision
+   arithmetic, and computational geometry to implement a novel drag-and-drop
+   algorithm.
 
  * `ocaml/interpreter`: an interpreter implementation project for a subset of
    OCaml, including type inference.
 
  * `ocaml/mapreduce`: an implementation of a distributed map/reduce platform
-   using async.
+   using Async.
 
  * `java/fiveinrow`: a tic-tac-toe like game, intended to be students' first
    project with multiple high-level components.
@@ -66,8 +68,8 @@ teamwork. I also think it's important for students to be involved in enough of
 each project that they can appreciate how the parts fit together, and the
 advantages of good software design.
 
-Tangrams (CS 3110 Functional Programming)
------------------------------------------
+Tangrams (CS 3110 Functional Programming, `ocaml/tangrams`)
+-----------------------------------------------------------
 
 This is a large project focusing on modular software design.  The students had
 to provide several implementations of a hierarchy of numeric interfaces, and
@@ -83,8 +85,8 @@ interface (using an interface design that I invented) that makes use of the
 arbitrary precision arithmetic implemented by the students.
 
 
-OCalf interpreter (CS 3110 Functional programming)
---------------------------------------------------
+OCalf interpreter (CS 3110 Functional programming, `ocaml/interpreter`)
+-----------------------------------------------------------------------
 
 An interpreter is a staple of a functional programming course.  I redesigned
 the CS 3110 interpreter project, changing it from an untyped scheme-like
@@ -100,8 +102,8 @@ seem ancillary, I think that providing good tooling to the students really
 streamlined their experience and let them focus on the interesting problems.
 
 
-MapReduce (CS 3110 Functional programming)
-------------------------------------------
+MapReduce (CS 3110 Functional programming, `ocaml/mapreduce`)
+-------------------------------------------------------------
 
 For historical reasons, Cornell's functional programming course (CS 3110) used
 to cover concurrent programming with threads and monitors.  This was never a
@@ -109,20 +111,20 @@ good fit for a variety of reasons, so my co-instructors and I redesigned the
 concurrency module to cover promise-based concurrency using Jane Street's Async
 library.
 
-I redesigned the existing MapReduce project to make use of async and added
-exercises to help them learn how to use the async library.  Our primary goal
+I redesigned the existing MapReduce project to make use of Async and added
+exercises to help them learn how to use the Async library.  Our primary goal
 for the project was to introduce students to promise-based asynchronous
 programming.
 
-The async library is an industrial-strength library designed for
+The Async library is an industrial-strength library designed for
 high-performance computing.  As a result, the official Async documentation was
 much more complex than was appropriate for our students.  As part of this
 project, I developed a more focused set of OCamldoc documentation for the parts
 of the library that the students needed to interact with (see `doc/async.mli`).
 
 
-Five in a row (CS 2110 Object oriented programming)
----------------------------------------------------
+Five in a row (CS 2110 Object oriented programming, `java/fiveinrow`)
+---------------------------------------------------------------------
 
 This project was given midway through the object-oriented programming course,
 to help the students move from focusing on the semantics of objects and the
@@ -132,8 +134,8 @@ Model/View/Controller.  It also shows students the value of programming against
 an interface by having them implement the same interface in multiple ways.
 
 
-Log-structured Filesystem (CS 4410 Operating Systems)
------------------------------------------------------
+Log-structured Filesystem (CS 4410 Operating Systems, `c/lfs`)
+--------------------------------------------------------------
 
 Cornell's OS course has traditionally had a userspace log-structured filesystem
 implementation project, but the source code is written in python, and there's a
@@ -152,8 +154,8 @@ the code to the students as a study guide and an example of using memory mapped
 I/O and memory segmentation.
 
 
-Fabric
-======
+Graduate Research Project (`java/fabric`)
+=========================================
 
 Most of my graduate research was conducted in the context of the Fabric
 project.  I was one of four lead developrs of the Fabric language and system.
