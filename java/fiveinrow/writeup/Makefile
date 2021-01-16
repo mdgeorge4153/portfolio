@@ -1,5 +1,5 @@
 default: all
-all: javadoc a5release.zip writeup.html
+all: a5release.zip writeup.html javadoc
 
 clean:
 	git clean -fdX
