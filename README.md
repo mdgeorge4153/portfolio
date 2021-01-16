@@ -1,31 +1,49 @@
 Michael George's Programming Portfolio
 ======================================
 
-This repository contains several samples of my work, demonstrating a variety of
+This repository contains several samples of my work, highlighting a variety of
 programming projects that I've worked on in various languages and settings.
 
 This document gives a brief overview of each of the projects contained herein.
 The projects that are open source are referenced as submodules so that you can
 view the version history and other related public information.
 
-Here is a brief outline of the projects; further details are listed below.
+Here is a brief outline of the projects; the projects are described in further
+detail below.
 
 Large research projects:
 
  * `java/fabric`: an extension of Java with language-level support for
    distributed computing, mobile code, and strong information flow control.
 
-Projects developed for courses:
+Projects developed for students:
 
  * `ocaml/tangrams`: a project that brings together modular software design,
    arbitrary-precision arithmetic, and computational geometry to implement a
-   novel drag-and-drop algorithm
+   novel drag-and-drop algorithm.
 
  * `ocaml/interpreter`: an interpreter implementation project for a subset of
-   OCaml, including type inference
+   OCaml, including type inference.
 
  * `ocaml/mapreduce`: an implementation of a distributed map/reduce platform
    using async.
+
+ * `java/fiveinrow`: a tic-tac-toe like game, intended to be students' first
+   project with multiple high-level components.
+
+ * `c/lfs`: a project to demonstrate the layout and operation of a log-structured
+   filesystem.  Also serves as a demo for memory-mapped I/O and segmentation.
+
+Personal open-source experiments:
+
+ * `js/jamcircle`: a prototype videoconferencing application designed for
+   playing music together.
+
+ * `java/jalgebra`: an exploration of an unusual design pattern for
+   object-oriented number classes, including a custom annotation processor to
+   support quickcheck-like testing.
+
+ * `ocaml/sorts`: a monadic framework for animating in-place sorting algorithms.
 
 Fabric
 ======
@@ -75,12 +93,17 @@ I've also taken great care to help the students focus on what's important
 for a given project, while still providing them with interesting code to
 explore on their own if they want to.
 
-My projects tended to be large and ambitious (perhaps slightly too ambitious).
+In particular, I've put a lot of time into making the interfaces and
+documentation for these projects clear and tailored to the students' level of
+expertise.
+
+TODO: explain release/ writeup/ etc.
+
+My projects tended to be large and ambitious (perhaps a little too ambitious).
 I believe that students benefit from working on large projects that require
 teamwork. I also think it's important for students to be involved in enough of
 each project that they can appreciate how the parts fit together, and the
 advantages of good software design.
-
 
 Tangrams (CS 3110 Functional Programming)
 -----------------------------------------
@@ -104,8 +127,8 @@ OCalf interpreter (CS 3110 Functional programming)
 
 An interpreter is a staple of a functional programming course.  I redesigned
 the CS 3110 interpreter project, changing it from an untyped scheme-like
-language to a typed OCaml-like language.  We also added a type system, and had
-the students implement a small part of a type inference algorithm.
+language to a subset of OCaml.  We also added a type system, and had the
+students implement a small part of a type inference algorithm.
 
 In addition to changing the source language, I cleaned up the structure of the
 code significantly, and also put a fair amount of polish into the tools we
@@ -119,11 +142,28 @@ streamlined their experience and let them focus on the interesting problems.
 MapReduce (CS 3110 Functional programming)
 ------------------------------------------
 
+For historical reasons, Cornell's functional programming course (CS 3110) used
+to cover concurrent programming with threads and monitors.  This was never a
+good fit for a variety of reasons, so my co-instructors and I redesigned the
+concurrency module to cover promise-based concurrency using Jane Street's Async
+library.
 
+I redesigned the existing MapReduce project to make use of async and added
+exercises to help them learn how to use the async library.  Our primary goal
+for the project was to introduce students to promise-based asynchronous
+programming.
+
+The async library is an industrial-strength library designed for
+high-performance computing.  As a result, the official Async documentation was
+much more complex than was appropriate for our students.  As part of this
+project, I developed a more focused set of OCamldoc documentation for the parts
+of the library that the students needed to interact with (see `doc/async.mli`).
 
 
 Five in a row (CS 2110 Object oriented programming)
 ---------------------------------------------------
+
+
 
 Log-structured Filesystem (CS 4410 Operating Systems)
 -----------------------------------------------------
@@ -134,27 +174,62 @@ lot of code and effort that goes into managing structs and their sizes, to
 serializing python objects, and so on.
 
 This seemed like one of the few places where C is the best choice.  This is my
-exploration into a simple C LFS implementation.  It uses memory-mapped IO to
+exploration into a simple C LFS implementation.  It uses memory-mapped I/O to
 avoid all of the file conversion issues; the disk data structures are stored
 directly in memory.
 
 I did this in the middle of a summer session where we didn't run the full LFS
 project, so I didn't bother turning it into an actual project or give it much
-of a user interface, but I think it's a nice little piece of code.  I gave it
-to the students as an example of using memory mapped I/O and memory
-segmentation.
+of a user interface, but I think it's a nice little piece of code.  I released
+the code to the students as a study guide and an example of using memory mapped
+I/O and memory segmentation.
 
-Personal open-source projects
------------------------------
 
-java/jalgebra
+Personal open-source experiments
+================================
 
-js/stars
+JamCircle
+---------
 
-js/jamcircle
+One of the things I miss from before the pandemic is being able to play my
+fiddle with friends.  Standard videoconferencing software is unacceptable for
+playing music, because music requires tighter synchronization than internet
+latency typically allows.
 
-ocaml/sorts
+I realized that by removing two-directional communication, I could create the
+illusion of zero latency.  JamCircle orders the performers in time, and each
+performer can only observe the performers that come before them.  They then play
+along with that music as they hear it, and they can locally synchronize their
+own stream with that of the past performers.  They then forward this combined
+stream to the next player in time.
 
-Publications
-------------
+This repository contains my current prototype for an application that
+implements this design.  I want the program to be as widely available as
+possible, so I've decided to build it as a web application using WebRTC.  I
+don't have much experience with the modern JavaScript ecosystem and the
+application has a lot of moving parts, so this project is really just an
+experimental prototype.  But it's neat, and it's what I'm working on right now,
+so I decided to include it.
+
+
+Sorts (`ocaml/sorts`)
+---------------------
+
+When I took my first computer science class in middle school and learned about
+sorting algorithms, the instructor showed us a demo that animated several
+in-place sorting algorithms side by side.  I remember spending a good chunk of
+time that summer figuring out how to implement that program in C++.  In
+retrospect, I was manually implementing coroutines by storing the stack in an
+auxiliary data structure, but I didn't know that.
+
+When I learned about monads, this old problem came to mind as a potential
+application.  This little program defines a sorting monad in OCaml that defines
+`compare` and `swap` methods.  It allows you to write in-place sorting
+algorithms in an imperative style, and allows running them in an animated
+fashion.
+
+
+JAlgebra (`java/jalgebra`)
+--------------------------
+
 
