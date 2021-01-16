@@ -11,12 +11,12 @@ view the version history and other related public information.
 Here is a brief outline of the projects; the projects are described in further
 detail below.
 
-Large research projects:
+### Large research projects:
 
  * `java/fabric`: an extension of Java with language-level support for
    distributed computing, mobile code, and strong information flow control.
 
-Projects developed for students:
+### Projects developed for students:
 
  * `ocaml/tangrams`: a project that brings together modular software design,
    arbitrary-precision arithmetic, and computational geometry to implement a
@@ -34,7 +34,7 @@ Projects developed for students:
  * `c/lfs`: a project to demonstrate the layout and operation of a log-structured
    filesystem.  Also serves as a demo for memory-mapped I/O and segmentation.
 
-Personal open-source experiments:
+### Personal open-source experiments:
 
  * `js/jamcircle`: a prototype videoconferencing application designed for
    playing music together.
