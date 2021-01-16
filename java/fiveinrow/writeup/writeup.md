@@ -242,7 +242,7 @@ stylistic decision you make.  Think about who the audience for that code is,
 and what will make your program most readable to them.  Thinking about how to
 make your code as easy to read as possible is the essence of good style.
 
-Another example: there are tradeoffs between different style guidelins.  For
+Another example: there are tradeoffs between different style guidelines.  For
 example, the following method declaration:
 
     private Board makeBoard(@NonNull Board other, @NonNull Location locToChange, @NonNull Player p) throws IllegalStateException, IllegalArgumentException {
