@@ -1,12 +1,17 @@
 Michael George's Programming Portfolio
 ======================================
 
+* [Website](https://www.cs.cornell.edu/~mdgeorge/)
+*   [Email](mailto:mdgeorge@cs.cornell.edu)
+
 This repository contains several samples of my work, highlighting a variety of
 programming projects that I've worked on in various languages and settings.
 
 This document gives a brief overview of each of the projects contained herein.
-The projects that are open source are referenced as submodules so that you can
-view the version history and other related public information.
+The projects that are open source are referenced as git submodules so that you
+can view the version history and other related public information.  Each project
+has a README file in its directory with information about the file organization
+and how to build and run the project.
 
 Here is a brief outline of the projects; the projects are described in further
 detail below.
@@ -167,8 +172,8 @@ I/O and memory segmentation.
 
 
 <a id="fabric"></a>
-[Graduate Research Project](java/fabric)
-========================================
+[Graduate Research Project (Fabric)](java/fabric)
+=================================================
 
 Most of my graduate research was conducted in the context of the Fabric
 project.  I was one of four lead developrs of the Fabric language and system.
