@@ -45,43 +45,6 @@ Personal open-source experiments:
 
  * `ocaml/sorts`: a monadic framework for animating in-place sorting algorithms.
 
-Fabric
-======
-
-Most of my graduate research was conducted in the context of the Fabric
-project.  I was one of four lead developrs of the Fabric language and system.
-Fabric is an extension of Java with language-level support for distributed
-computing, mobile code, and strong information flow control.
-
-The public fabric repository is contained in the `java/fabric` directory.  As
-one of the lead developers, I've made significant contributions to all portions
-of the language, system, and example application implementations (296kloc
-according to github).
-
-My Fabric related publications are contained in the `pubs` directory:
-
-`pubs/dissert.pdf`
-: Trust, Authority, and Information Flow in Secure Distributed Systems.
-: Doctoral dissertation. Cornell University 2020.
-
-`pubs/fabric-jcs.pdf`
-: Fabric: Building Open Distributed Systems Securely by Construction.
-: J. Computer Security, 2017.
-  Jed Liu, Owen Arden, Michael D. George, and Andrew C. Myers.
-
-`pubs/mobile-oakland12.pdf`
-: Sharing Mobile Code Securely with Information Flow Control.
-: IEEE Symp. on Security and Privacy, May 2012.
-  Owen Arden, Michael D. George, Jed Liu, K. Vikram, Aslan Askarov, and Andrew C. Myers.
-
-`pubs/fabric-sosp09.pdf`
-: Fabric: A Platform for Secure Distributed Computation and Storage.
-: 22nd ACM Symp. on Operating System Principles (SOSP), October 2009.
-  Jed Liu, Michael D. George, K. Vikram, Xin Qi, Lucas Waye, and Andrew C.  Myers.
-
-You can also find more information about the Fabric project at the
-[project website](https://research.cs.cornell.edu/fabric/).
-
 
 Projects developed for courses
 ==============================
@@ -96,8 +59,6 @@ explore on their own if they want to.
 In particular, I've put a lot of time into making the interfaces and
 documentation for these projects clear and tailored to the students' level of
 expertise.
-
-TODO: explain release/ writeup/ etc.
 
 My projects tended to be large and ambitious (perhaps a little too ambitious).
 I believe that students benefit from working on large projects that require
@@ -163,6 +124,12 @@ of the library that the students needed to interact with (see `doc/async.mli`).
 Five in a row (CS 2110 Object oriented programming)
 ---------------------------------------------------
 
+This project was given midway through the object-oriented programming course,
+to help the students move from focusing on the semantics of objects and the
+mechanics of Java to focusing on the large-scale structure of programs.  This
+project introduces OO design concepts like the Observer pattern and
+Model/View/Controller.  It also shows students the value of programming against
+an interface by having them implement the same interface in multiple ways.
 
 
 Log-structured Filesystem (CS 4410 Operating Systems)
@@ -185,31 +152,79 @@ the code to the students as a study guide and an example of using memory mapped
 I/O and memory segmentation.
 
 
+Fabric
+======
+
+Most of my graduate research was conducted in the context of the Fabric
+project.  I was one of four lead developrs of the Fabric language and system.
+Fabric is an extension of Java with language-level support for distributed
+computing, mobile code, and strong information flow control.
+
+The public fabric repository is contained in the `java/fabric` directory.  As
+one of the lead developers, I've made significant contributions to all portions
+of the language, system, and example application implementations (296kloc
+according to github).
+
+My Fabric related publications are contained in the `pubs` directory:
+
+`pubs/dissert.pdf`
+: Trust, Authority, and Information Flow in Secure Distributed Systems.
+: Doctoral dissertation. Cornell University 2020.
+
+`pubs/fabric-jcs.pdf`
+: Fabric: Building Open Distributed Systems Securely by Construction.
+: J. Computer Security, 2017.
+  Jed Liu, Owen Arden, Michael D. George, and Andrew C. Myers.
+
+`pubs/mobile-oakland12.pdf`
+: Sharing Mobile Code Securely with Information Flow Control.
+: IEEE Symp. on Security and Privacy, May 2012.
+  Owen Arden, Michael D. George, Jed Liu, K. Vikram, Aslan Askarov, and Andrew C. Myers.
+
+`pubs/fabric-sosp09.pdf`
+: Fabric: A Platform for Secure Distributed Computation and Storage.
+: 22nd ACM Symp. on Operating System Principles (SOSP), October 2009.
+  Jed Liu, Michael D. George, K. Vikram, Xin Qi, Lucas Waye, and Andrew C.  Myers.
+
+You can also find more information about the Fabric project at the
+[project website](https://research.cs.cornell.edu/fabric/).
+
+
 Personal open-source experiments
 ================================
 
-JamCircle
----------
+These projects are ideas that I've explored out of curiousity in my free time.
+They are less complete and less polished than the professional projects above,
+but they give some idea of the things I'm interested in and my approach to
+exploration.
+
+JamCircle (`js/jamcircle`)
+--------------------------
 
 One of the things I miss from before the pandemic is being able to play my
 fiddle with friends.  Standard videoconferencing software is unacceptable for
 playing music, because music requires tighter synchronization than internet
-latency typically allows.
+latency typically allows.  Special-purpose jamming software tries to lower the
+latency as much as possible, but it still requires a low-latency connection and
+specialized hardware and software.
 
 I realized that by removing two-directional communication, I could create the
 illusion of zero latency.  JamCircle orders the performers in time, and each
 performer can only observe the performers that come before them.  They then play
 along with that music as they hear it, and they can locally synchronize their
 own stream with that of the past performers.  They then forward this combined
-stream to the next player in time.
+stream to the next player in time.  Even though the players are offset in time,
+they observe each other as being perfectly synchronized.
 
 This repository contains my current prototype for an application that
 implements this design.  I want the program to be as widely available as
 possible, so I've decided to build it as a web application using WebRTC.  I
-don't have much experience with the modern JavaScript ecosystem and the
-application has a lot of moving parts, so this project is really just an
-experimental prototype.  But it's neat, and it's what I'm working on right now,
-so I decided to include it.
+don't have much experience with the modern JavaScript ecosystem, and WebRTC is
+a new technology with spotty documentation, so this project is just an
+experimental prototype.  It has been quickly growing and changing as I'm
+learning, so the project organization isn't quite up to my normal standards.
+But it's a neat project, and it's what I'm working on right now, so I decided
+to include it.
 
 
 Sorts (`ocaml/sorts`)
@@ -231,5 +246,26 @@ fashion.
 
 JAlgebra (`java/jalgebra`)
 --------------------------
+
+The drag-and-drop algorithm contained in the tangrams project described above
+is interesting because any rounding error will quickly become noticable -- it is
+easy to create a hole that something should fit in but doesn't because of
+rounding, no matter what level of precision is used.  The best number format
+to use depends on the shapes and operations supported by the application.  For
+example, the tangrams game uses polygons and allows 15° rotations, which
+requires numbers of the form `(a + b√2 + c√3 + d√6)/e` (where `a`..`e` are
+integers).
+
+This led me to think about the best way to design an interface for numbers in
+various languages, and to provide clear specifications and automated testing.
+I've found that it's an interesting way to explore the generic programming
+facilities of different languages.
+
+Over the years, I have toyed with this idea in various languages (C++, Python,
+Java, OCaml, JavaScript, Coq).  The `jalgebra` project is my Java prototype.  I
+found that Java's annotation system provided an interesting hook for writing
+executable specifications. JAlgebra contains several mathematical interfaces
+and implementations of those interfaces.  It also contains a custom annotation
+processor that automatically generates quickcheck style tests.
 
 
