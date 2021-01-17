@@ -1,16 +1,17 @@
 
 * make sure it is clear how to build and run everything, where docs are, etc.
-* mapreduce writeup seems to be an old version
+* talk about build environment
 
 [X] java/fabric
 [ ] ocaml/tangrams
 [ ] ocaml/interpreter
 [ ] ocaml/mapreduce
+     - mapreduce writeup seems to be an old version
 [X] java/fiveinrow
      - nuke the zip file (mdg39-sol.zip)
      - build/run script
 [X] c/lfs
-[ ] js/jamcircle
-[ ] java/jalgebra
+[X] js/jamcircle
+[X] java/jalgebra
 [ ] ocaml/sorts
 
