@@ -1,4 +1,4 @@
-all: ps4-release.zip
+all: tangrams ps4-release.zip
 
 FILES = \
 	release/CHANGELOG.txt \
@@ -24,8 +24,12 @@ ps4-release.zip: $(FILES)
 	rm -f $@
 	zip $@ $(FILES)
 
+tangrams: $(wildcard sol/mdg39/*)
+	$(MAKE) -C sol/mdg39
+	ln -sf sol/mdg39/tangrams_opt tangrams
+
 clean:
-	git clean -fdX
+	git clean -fdX .
 
 .phony: all clean
 
