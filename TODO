@@ -1,9 +1,10 @@
 
-* make sure it is clear how to build and run everything, where docs are, etc.
-* talk about build environment
 
+[X] README
+     - make sure it is clear how to build and run everything, where docs are, etc.
+     - talk about build environment
 [X] java/fabric
-[ ] ocaml/tangrams
+[X] ocaml/tangrams
 [ ] ocaml/interpreter
 [ ] ocaml/mapreduce
      - mapreduce writeup seems to be an old version
@@ -13,5 +14,5 @@
 [X] c/lfs
 [X] js/jamcircle
 [X] java/jalgebra
-[ ] ocaml/sorts
+[X] ocaml/sorts
 

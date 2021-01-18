@@ -9,9 +9,12 @@ programming projects that I've worked on in various languages and settings.
 
 This document gives a brief overview of each of the projects contained herein.
 The projects that are open source are referenced as git submodules so that you
-can view the version history and other related public information.  Each project
-has a README file in its directory with information about the file organization
-and how to build and run the project.
+can view the version history and other related public information.
+
+Each project has a README file in its top-level directory containing
+information about the file organization and how to build and run the project.
+I've tested everything on Ubuntu 20.04 (focal); some of the projects may
+require a bit of work to build or run on other platforms.
 
 Here is a brief outline of the projects; the projects are described in further
 detail below.
