@@ -117,7 +117,19 @@ module type IntegersType = NiceRing
 (* TODO: module Integers : IntegersType = ... *)
 
 module type FloatsType = NiceField
-(* TODO: module Floats : FloatsType  = ... *)
+module Floats : FloatsType  = struct
+  type number = unit
+  let format          = failwith "unimplemented"
+  let float_of_number = failwith "unimplemented"
+  let is_non_neg      = failwith "unimplemented"
+  let ( * )           = failwith "unimplemented"
+  let one             = failwith "unimplemented"
+  let (~-)            = failwith "unimplemented"
+  let (+)             = failwith "unimplemented"
+  let zero            = failwith "unimplemented"
+  let (===)           = failwith "unimplemented"
+  let inv             = failwith "unimplemented"
+end
 
 module type Root23Type = sig
   include NiceRing

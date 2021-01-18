@@ -1,10 +1,12 @@
 default: all
 all:     tangrams
 
-CMOS    = numbers.cmo region.cmo geometry.cmo game.cmo
-GLFLAGS = -I $(shell ocamlfind query lablgl 2> /dev/null               \
-                 || (ocamlfind query lablGL | sed 's/lablgl/lablGL/g') \
-              ) lablglut.cma lablgl.cma
+CMOS     = numbers.cmo region.cmo geometry.cmo game.cmo
+OCAMLC   = ocamlc
+OCAMLOPT = ocamlopt
+GLFLAGS  = -I $(shell ocamlfind query lablgl 2> /dev/null               \
+                  || (ocamlfind query lablGL | sed 's/lablgl/lablGL/g') \
+               ) lablglut.cma lablgl.cma
 
 clean:
 	rm -f *.cmo *.cmi tangrams gltest
@@ -18,14 +20,18 @@ tangrams: $(CMOS) ui.cmo main.ml
 gltest: gltest.ml
 	ocamlc -o gltest $(GLFLAGS) $^
 
-numbers.cmo:  numbers.ml
-region.cmo:   numbers.cmo region.mli region.ml
-geometry.cmo: numbers.cmo region.cmo geometry.mli geometry.ml
-game.cmo:     numbers.cmo region.cmo geometry.cmo game.mli game.ml
-ui.cmo:       numbers.cmo region.cmo geometry.cmo game.cmo ui.ml
+.depend: $(wildcard *.ml*)
+	ocamldep $(FLAGS) $^ > .depend
+include .depend
 
-%.cmo:
-	ocamlc -c -o $@ $(GLFLAGS) nums.cma $^
+%.cmo: %.ml
+	$(OCAMLC) $(GLFLAGS) -c $< -o $@
+
+%.cmi: %.mli
+	$(OCAMLC) $(GLFLAGS) -c $< -o $@
+
+%.cmx: %.ml
+	$(OCAMLOPT) $(GLFLAGS:.cma=.cmxa) -c $< -o $@
 
 .phony: default all clean top
 
