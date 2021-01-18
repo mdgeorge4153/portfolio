@@ -118,6 +118,7 @@ module type IntegersType = NiceRing
 
 module type FloatsType = NiceField
 module Floats : FloatsType  = struct
+  (* TODO: implement this module *)
   type number = unit
   let format          = failwith "unimplemented"
   let float_of_number = failwith "unimplemented"

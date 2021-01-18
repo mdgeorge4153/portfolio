@@ -1,0 +1,12 @@
+
+ * There is a lot of math terminology that is unfamiliar and unnecessary.
+   Consider replacing Group, Ring, Field with Addable, Multipliable, Dividable
+   or something
+
+ * Reducing the rationals really improves performance, giving a much better
+   experience.  It might also be interesting to do a float approximation
+   wrapper
+
+ * The implementation of union in region.ml is suboptimal IIRC
+
+
