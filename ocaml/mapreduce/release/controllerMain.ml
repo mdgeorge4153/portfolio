@@ -1,4 +1,4 @@
-open Async.Std
+open Async
 
 let get_app name = match MapReduce.get_app name with
   | None     -> failwith ("App " ^ name ^ " not installed")
@@ -29,7 +29,7 @@ let run_remote name args addresses =
   AppMain.main args >>| fun () -> (shutdown 0)
 
 let () =
-  Command.async_basic
+  Command.async_spec
     ~summary:"Run the MapReduce controller"
     ~readme:AppList.list_apps
     Command.Spec.(

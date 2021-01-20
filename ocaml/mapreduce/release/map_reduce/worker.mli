@@ -1,6 +1,6 @@
 (** The interface to the worker server. *)
 
-open Async.Std
+open Async
 
 module Make (Job : MapReduce.Job) : sig
   (** Handle all of the requests for a single connection.  The Reader and

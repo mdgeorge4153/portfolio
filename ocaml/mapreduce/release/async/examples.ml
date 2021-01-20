@@ -1,4 +1,4 @@
-open Async.Std
+open Async
 
 let sec = Core.Std.sec
 

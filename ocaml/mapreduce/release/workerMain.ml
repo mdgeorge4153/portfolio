@@ -1,4 +1,4 @@
-open Async.Std
+open Async
 
 let () = Command.async_basic
     ~summary:"Run a MapReduce worker"

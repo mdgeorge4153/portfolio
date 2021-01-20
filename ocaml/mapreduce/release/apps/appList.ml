@@ -1,8 +1,8 @@
 open WordCount
 open InvertedIndex
 open DnaSequencing
-open RelationComposition
-open CommonFriends
+(* open RelationComposition *)
+(* open CommonFriends *)
 (* open MatrixMultiply *)
 
 let list_apps () =

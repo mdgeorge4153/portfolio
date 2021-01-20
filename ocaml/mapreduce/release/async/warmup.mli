@@ -1,6 +1,6 @@
 (** Async warmup exercises *)
 
-open Async.Std
+open Async
 
 (** [fork d f1 f2] runs the [f1] and [f2] once [d] becomes determined.  The
     output of [f1] and [f2] should be ignored. *)

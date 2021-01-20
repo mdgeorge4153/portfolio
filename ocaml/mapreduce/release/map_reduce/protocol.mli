@@ -1,6 +1,6 @@
 (** The messages sent between the worker and the controller. *)
 
-open Async.Std
+open Async
 
 (******************************************************************************)
 (** {2 Sending and receiving messages}                                        *)

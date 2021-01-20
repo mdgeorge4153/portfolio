@@ -1,6 +1,6 @@
 (** The core MapReduce types --- Job, App, and Controller *)
 
-open Async.Std
+open Async
 
 type id = string
 

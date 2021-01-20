@@ -1,4 +1,4 @@
-open Async.Std
+open Async
 
 (******************************************************************************)
 (** {2 Marshaling and unmarshaling}                                           *)

@@ -1,5 +1,5 @@
 (** Async exercise *)
-open Async.Std
+open Async
 
 (** An asynchronous queue.  'a s can be pushed onto the queue; popping blocks
     until the queue is non-empty and then returns an element. *)
