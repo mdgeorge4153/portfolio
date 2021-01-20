@@ -1,6 +1,6 @@
 open Async
 
-let sec = Core.Std.sec
+let sec = Core.sec
 
 open Warmup
 
