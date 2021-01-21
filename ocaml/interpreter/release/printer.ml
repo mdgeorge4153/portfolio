@@ -29,7 +29,7 @@ type precedence    = int
 type associativity = Left | Right | Unassoc
 type opspec        = precedence * associativity
 
-let opspec = function
+let opspec : expr -> opspec = function
   | Var _ | Unit | Int _ | Bool _ | String _
       -> 8, Unassoc
   | App _ | Variant _
@@ -340,8 +340,8 @@ let format_list format_elt f l =
   Format.fprintf f "]@]";
   ()
 
-let rec format_stream_int   = format_stream Format.pp_print_int
-let rec format_stream_float = format_stream Format.pp_print_float
+let format_stream_int   = format_stream Format.pp_print_int
+let format_stream_float = format_stream Format.pp_print_float
 
 let format_stream_int_list = format_stream (format_list Format.pp_print_int)
 
@@ -351,23 +351,23 @@ let format_stream_int_list = format_stream (format_list Format.pp_print_int)
 (******************************************************************************)
 
 let set_color = function
-  | "keyword" -> "\027[38;5;33m"  (* blue   *)
-  | "def"     -> "\027[38;5;208m" (* orange *)
-  | "type"    -> "\027[38;5;34m"  (* green  *)
-  | _         -> "\027[38;5;124m" (* red    *)
+  | Format.String_tag "keyword" -> "\027[38;5;33m"  (* blue   *)
+  | Format.String_tag "def"     -> "\027[38;5;208m" (* orange *)
+  | Format.String_tag "type"    -> "\027[38;5;34m"  (* green  *)
+  | _                           -> "\027[38;5;124m" (* red    *)
 
 let clear_color _ = "\027[38;5;15m"
 
 let print_tags = {
-  Format.mark_open_tag   = set_color;
-  Format.mark_close_tag  = clear_color;
-  Format.print_open_tag  = ignore;
-  Format.print_close_tag = ignore;
+  Format.mark_open_stag   = set_color;
+  Format.mark_close_stag  = clear_color;
+  Format.print_open_stag  = ignore;
+  Format.print_close_stag = ignore;
 }
 
 let make_printer formatter e =
   Format.set_margin 80;
-  Format.set_formatter_tag_functions print_tags;
+  Format.set_formatter_stag_functions print_tags;
   Format.set_tags true;
   Format.printf "@<0>%s" (clear_color ());
   Format.printf "%a@." formatter e
