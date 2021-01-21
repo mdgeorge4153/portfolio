@@ -1,5 +1,15 @@
-default: all
-all:     sol zip check
+default: info
+all:     zip writeup
+
+info:
+	@echo "This Makefile is for building the documentation and release files"
+	@echo ""
+	@echo "See README.md for information on building and running the solution"
+	@echo ""
+	@echo "Additional make tagets:"
+	@echo "   - make zip:     release zip files, including generated documentation"
+	@echo "   - make doc:     just the generated documentation"
+	@echo "   - make writeup: the assignment writeup"
 
 zip: ps5.zip
 
@@ -24,6 +34,7 @@ doc: doc/async.mli doc/docs.odocl $(shell find release -name "*.mli" | grep -v _
 
 writeup:
 	$(MAKE) -C writeup ps5b.pdf
+	cp writeup/ps5b.pdf .
 
 ps5.zip: clean writeup doc
 	cp -r release ps5
@@ -51,7 +62,7 @@ check: ps5.zip
 	&& cd ..                               \
 	&& rm -rf tmp
 
-.PHONY: doc all clean sol zip check writeup cleanzip
+.PHONY: default doc all clean zip check writeup info
 
 #
 # vim: noet ts=8 sw=8
