@@ -2,12 +2,11 @@
 (** This is documentation for a subset of the [Async] library that should be
     sufficient for completing problem set 5.  We have omitted some modules,
     functions, and optional arguments.  The full [Async] documentation can be
-    found {{:https://ocaml.janestreet.com/ocaml-core/111.03.00/doc/async/#Std} here}.  *)
+    found {{:https://ocaml.janestreet.com/ocaml-core/latest/doc/async/Async/index.html} here}.  *)
 
 (** The common definitions for [Async].  Async programs typically only
-    [open Async.Std], the modules within [Async.Std] are typically referred to
+    [open Async], the modules within [Async] are typically referred to
     explicitly. *)
-module Std : sig
 
 (******************************************************************************)
 (** {2 Blocking and non-blocking functions}                                   *)
@@ -228,24 +227,24 @@ end
     module functions. *)
 
 (******************************************************************************)
-(** {2 Time and timeouts }                                                    *)
+(** {2 Time_ns and timeouts }                                                    *)
 (******************************************************************************)
 
-(** Note: Use the function [Core.Std.sec] to create {!Core.Std.Time.Span.t}s.
-    It takes in a [float] [t] and produces a [Time.Span.t] representing [t]
+(** Note: Use the function [Core.Time_ns.Span.of_sec] to create {!Core.Time_ns.Span.t}s.
+    It takes in a [float] [t] and produces a [Time_ns.Span.t] representing [t]
     seconds. *)
 
-val after : Core.Std.Time.Span.t -> unit Deferred.t
+val after : Core.Time_ns.Span.t -> unit Deferred.t
 (** a deferred that becomes determined after the given amount of time *)
 
-val with_timeout : Core.Std.Time.Span.t -> 'a Deferred.t
-                -> [`Result of 'a | `Timeout] Deferred.t
+val with_timeout : Core.Time_ns.Span.t -> 'a Deferred.t
+                -> [`Result of 'a | `Time_nsout] Deferred.t
 (** [with_timeout t x] will become determined with [`Result v] if [x] becomes
     determined with [v] within the timespan [t].  Otherwise, the value will be
-    [`Timeout]. *)
+    [`Time_nsout]. *)
 
 val every : ?start : unit Deferred.t -> ?stop : unit Deferred.t
-         -> Core.Std.Time.Span.t
+         -> Core.Time_ns.Span.t
          -> (unit -> unit)
          -> unit
 (** [every t f] schedules [f] to be executed every [t] seconds.  If the
@@ -333,10 +332,9 @@ end
 (** {2 Error handling}                                                        *)
 (******************************************************************************)
 
-val try_with : (unit -> 'a Deferred.t) -> ('a,exn) Core.Std.Result.t Deferred.t
-(** [try_with f] runs the non-blocking function [f], and returns [Core.Std.Ok x] if
+val try_with : (unit -> 'a Deferred.t) -> ('a,exn) Core.Result.t Deferred.t
+(** [try_with f] runs the non-blocking function [f], and returns [Core.Ok x] if
     [f ()] returns [x].  If [f ()] raises the exception [e], then [try_with f]
-    returns [Core.Std.Error e]. *)
+    returns [Core.Error e]. *)
 
-end
 
