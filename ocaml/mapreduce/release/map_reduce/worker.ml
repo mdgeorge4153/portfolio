@@ -12,7 +12,7 @@ end
 let init port =
   Tcp.Server.create
     ~on_handler_error:`Raise
-    (Tcp.on_port port)
+    (Tcp.Where_to_listen.of_port port)
     (fun _ r w ->
       Reader.read_line r >>= function
         | `Eof    -> return ()
