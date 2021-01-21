@@ -1,0 +1,8 @@
+(include_subdirs unqualified)
+(env
+  (dev
+    (flags (:standard -w -27-6-32-33))))
+
+(executables
+  (names controllerMain workerMain)
+  (libraries core async str))
