@@ -178,6 +178,10 @@ I/O and memory segmentation.
 [Graduate Research Project (Fabric)](java/fabric)
 =================================================
 
+**Note:** the Fabric repository is very large, so I haven't included it in this
+bundle.  You can fetch it using git by running `git submodule update --init`,
+or you can browse the source [online](https://github.com/apl-cornell/fabric).
+
 Most of my graduate research was conducted in the context of the Fabric
 project.  I was one of four lead developrs of the Fabric language and system.
 Fabric is an extension of Java with language-level support for distributed
