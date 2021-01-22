@@ -1,6 +1,6 @@
 (env
   (dev
-    (flags (:standard -w -27-6-32))))
+    (flags (:standard -w -27-6-32-39))))
 (library
   (name ocalf)
   (inline_tests)
