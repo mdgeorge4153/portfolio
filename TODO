@@ -5,8 +5,8 @@
      - talk about build environment
 [X] java/fabric
 [X] ocaml/tangrams
-[ ] ocaml/interpreter
-[ ] ocaml/mapreduce
+[X] ocaml/interpreter
+[X] ocaml/mapreduce
      - mapreduce writeup seems to be an old version
 [X] java/fiveinrow
      - nuke the zip file (mdg39-sol.zip)
