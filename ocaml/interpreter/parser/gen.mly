@@ -13,7 +13,6 @@ let parse_error _ =
   failwith ("Parse error: ("^start_line^"."^start_char^"-"^end_line^"."^end_char)
 %}
 
-%token ASSIGN
 %token MATCH
 %token WITH
 %token PIPE
@@ -35,7 +34,6 @@ let parse_error _ =
 %token GTQ
 %token EQ
 %token NEQ
-%token AND
 %token COMMA
 %token <string> VAR
 %token <string> CONSTR
@@ -53,21 +51,18 @@ let parse_error _ =
 %token TINT
 %token TBOOL
 %token TSTRING
-%token TCONS
 
 %right ARROW
 %nonassoc LET
 %nonassoc FUN MATCH IF IN
 %right PIPE
 %nonassoc COMMA
-%left GT LT LTQ GTQ EQ NEQ ASSIGN
+%left GT LT LTQ GTQ EQ NEQ
 %right CONCAT
 %left PLUS MINUS
 %left MULT
 %nonassoc VAR LBRACE UNIT INT TRUE FALSE LPAREN STRING
 %left CONSTR APP
-
-%left TCONS
 
 /* entry point */
 
@@ -156,7 +151,7 @@ typ:
   | VAR { TVariant ([], $1) }
   | typ VAR { TVariant ([$1], $2) }
   | LPAREN typ RPAREN { $2 }
-  | LPAREN typ_list RPAREN VAR %prec TCONS
+  | LPAREN typ_list RPAREN VAR
         { TVariant ($2, $4) }
 ;
 

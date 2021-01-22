@@ -1,5 +1,4 @@
-# 1 tail.ml
-
+# 1 "tail.ml"
 
 let parse_expr s =
   expr token (Lexing.from_string s)
@@ -23,11 +22,11 @@ let parse_variant_spec_from_file f =
 
 (** Regression tests *)
 
-TEST =
+let%test _ =
   parse_type "('a,'b) choice"
-    = TVariant([TAlpha "a"; TAlpha "b"], "choice");
+    = TVariant([TAlpha "a"; TAlpha "b"], "choice")
 
-TEST = 
+let%test _ = 
   parse_variant_spec "type ('a, 'b) mystery = Alpha of 'a | Beta of 'b | Gamma of ('a * ('a, 'b) mystery)"
     =
   {
@@ -39,10 +38,9 @@ TEST =
     ];
   }
 
-TEST =
+let%test _ =
   parse_expr "if true then (true, \"hello\") else (false, \"hi\")"
-    =
-  If (Bool true, Pair (Bool true, String "hello"),
+    = If (Bool true, Pair (Bool true, String "hello"),
                  Pair (Bool false, String "hi"))
 
 

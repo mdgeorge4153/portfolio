@@ -6,7 +6,6 @@
 
 open Ast
 open TypedAst
-open Printer
 
 (** apply f [e1; e2; e3] is App(App(App(f, e1), e2), e3) *)
 let apply = List.fold_left (fun f e -> App (f,e))

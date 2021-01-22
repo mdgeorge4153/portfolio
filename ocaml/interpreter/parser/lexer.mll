@@ -1,6 +1,4 @@
 {
-exception Eof
-
 let incr_linenum lexbuf =
   let pos = lexbuf.Lexing.lex_curr_p in
     lexbuf.Lexing.lex_curr_p <- { pos with
