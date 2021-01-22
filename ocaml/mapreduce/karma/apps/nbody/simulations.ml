@@ -1,4 +1,4 @@
-open Async.Std
+open Async
 
 (* see .mli *)
 type body = {

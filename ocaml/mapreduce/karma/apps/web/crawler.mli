@@ -1,4 +1,4 @@
-open Async.Std
+open Async
 
 module Make (C : MapReduce.Controller) : sig
 

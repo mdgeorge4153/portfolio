@@ -1,4 +1,4 @@
-open Async.Std
+open Async
 
 (******************************************************************************)
 (** {2 URLs}                                                                  *)
@@ -12,9 +12,10 @@ module URL : sig
   val of_string : string -> url option
   val to_cohttp : url -> Uri.t
 end = struct
-  (** Invariant: all urls represent absolute urls. *)
-  (** Note: we define urls as strings instead of Neturl.urls so that they can be
-      marshalled. *)
+  (* Invariant: all urls represent absolute urls. *)
+
+  (* Note: we define urls as strings instead of Neturl.urls so that they can be
+     marshalled. *)
   type url = string
   let relative base link =
     try
@@ -45,7 +46,6 @@ module TailList : sig
 
   val of_list : 'a list -> 'a t
   val to_list : 'a t -> 'a list
-  val rev     : 'a t -> 'a list
 
   val (<::) : 'a t -> 'a -> 'a t
   val (@)   : 'a t -> 'a list -> 'a t
@@ -59,7 +59,6 @@ end = struct
   let (<::) lst elem = elem::lst
   let (@)   lst tail = List.rev_append tail lst
   let nil   = []
-  let rev l = l
 end
 
 (******************************************************************************)
@@ -115,13 +114,13 @@ let url_words u =
   let str = URL.to_string u in
   Str.split word_split str
 
-let rec parse_page url docs =
+let parse_page url docs =
   let rec helper docs accum = match docs with
     | [] -> accum
 
     | (Nethtml.Data s) :: tl ->
         let words = Str.split whitespace s in
-        let words = List.map String.lowercase words in
+        let words = List.map String.lowercase_ascii words in
         helper tl {accum with _words=TailList.(accum._words @ words)}
 
     | Nethtml.Element ("title",_,children) :: tl ->
@@ -180,16 +179,16 @@ let get url =
   let uri = URL.to_cohttp url in
   print_endline ("fetching "^url_string);
   let get () =
-    Cohttp_async.Client.get ~interrupt:(after (Core.Std.sec 10.)) uri
+    Cohttp_async.Client.get ~interrupt:(after (Core.sec 10.)) uri
   in
   try_with (fun () ->
-    with_timeout (Core.Std.sec 10.) (get ()) >>= function
+    with_timeout (Core.sec 10.) (get ()) >>= function
      | `Result page -> print_endline ("fetched "^url_string); return (Some page)
      | `Timeout     -> print_endline ("timeout "^url_string); return None
   ) >>= function
-     | Core.Std.Result.Error _ -> print_endline ("exception "^url_string);
+     | Core.Result.Error _ -> print_endline ("exception "^url_string);
                                   return None
-     | Core.Std.Result.Ok resp -> return resp
+     | Core.Result.Ok resp -> return resp
 
 let fetch_page url =
   get url >>= function

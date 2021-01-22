@@ -1,14 +1,11 @@
-open Async.Std
+open Async
 
 type body = {
-  (** mass in kg *)
-  mass : float;
+  mass : float;        (** mass in kg *)
 
-  (** position in meters *)
-  position : Vector.t;
+  position : Vector.t; (** position in meters *)
 
-  (** velocity in meters / sec *)
-  velocity : Vector.t;
+  velocity : Vector.t; (** velocity in meters / sec *)
 }
 
 val g : Vector.scalar

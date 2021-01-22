@@ -1,6 +1,6 @@
 (** Module for fetching html pages from the web and parsing them *)
 
-open Async.Std
+open Async
 
 (******************************************************************************)
 (** {2 URLs}                                                                  *)
@@ -17,19 +17,13 @@ val string_to_url : string -> url option
 
 type page = {
   url : url;
+  title : string;      (** The document title *)
+  links : url list;    (** The list of outgoing links *)
+  words : string list; (** The list of words in the page *)
 
-  (** The document title *)
-  title : string;
-
-  (** The list of outgoing links *)
-  links : url list;
-
-  (** The list of words in the page *)
-  words : string list;
-
-  (** A list of ``descriptive'' words about the document (such as words from
-      the document title and descsription meta tags *)
-  descr : string list
+  descr : string list  (** A list of ``descriptive'' words about the document,
+                          such as words from the document title and
+                          descsription meta tags *)
 }
 
 (** Fetch and return a page. *)

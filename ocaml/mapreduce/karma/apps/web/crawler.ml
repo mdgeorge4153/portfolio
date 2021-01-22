@@ -1,4 +1,4 @@
-open Async.Std
+open Async
 
 (** The input is a list of URIs, each of which is either new or old.  The new
     urls are fetched and traversed.  The complete set of URIs are returned, with
@@ -20,7 +20,7 @@ module Crawler = struct
   let map_one task = match task with
 
     (* just pass through completed jobs *)
-    | Done {Web.url=u}
+    | Done {Web.url=u; _}
     | Fail u -> return [u,task]
 
     | Todo url ->
@@ -61,7 +61,7 @@ module Crawler = struct
 
 end
 
-MapReduce.register_job (module Crawler)
+let () = MapReduce.register_job (module Crawler)
 
 module Make (C : MapReduce.Controller) = struct
 

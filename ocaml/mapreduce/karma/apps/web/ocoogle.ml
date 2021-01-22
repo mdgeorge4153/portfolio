@@ -1,4 +1,4 @@
-open Async.Std
+open Async
 
 (** Web search application.  When run, crawls the web and then presents an
     interactive dialogue allowing the user to search. *)
@@ -38,7 +38,7 @@ module App = struct
       print_endline "page_rank complete";
       print_endline "";
 
-      let stdin = Core.Std.Lazy.force Reader.stdin in
+      let stdin = Core.Lazy.force Reader.stdin in
       let rec loop () =
         print_endline "enter a search string (or control-D to exit)";
         Reader.read_line stdin >>= function
@@ -68,6 +68,6 @@ module App = struct
   end
 end
 
-MapReduce.register_app (module App)
+let () = MapReduce.register_app (module App)
 
 
