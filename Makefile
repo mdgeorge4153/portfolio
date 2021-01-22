@@ -12,7 +12,7 @@ $(DIRECTORY): .git/refs/heads/main
 
 $(DIRECTORY).zip: $(DIRECTORY)
 	rm -f $@
-	zip -r $@ $^
+	zip --symlinks -r $@ $^
 
 $(DIRECTORY).tar.gz: $(DIRECTORY)
 	tar -xzf $@ $^
