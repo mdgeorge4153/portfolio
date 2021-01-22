@@ -32,19 +32,19 @@ let tl_sol (Stream(_,t)) = t ()
 
 let map_sol f = univ_sol (f <..> hd_sol, tl_sol)
 
-TEST_UNIT "take1" = 
+let%test_unit "take1" = 
   timed begin fun () ->
     let n = 0 in 
     n === (List.length (take n nats))
   end
 
-TEST_UNIT "take2" = 
+let%test_unit "take2" = 
   timed begin fun () ->
     let n = 1 in 
     n === (List.length (take n nats))
   end
 
-TEST_UNIT "take3" = 
+let%test_unit "take3" = 
   timed begin fun () ->
     let rec test_range n s acc = 
       if n <= 0 then acc 
@@ -54,39 +54,39 @@ TEST_UNIT "take3" =
     assert_true (test_range 1001 nats true)
   end
 
-TEST_UNIT "repeat1" = 
+let%test_unit "repeat1" = 
   timed begin fun () -> 
     let ones = repeat 1 in 
     [1;1;1;1;1;1;1;1;1;1;1;1;1;1;1] === (take_sol 15 ones)
   end 
 
-TEST_UNIT "repeat2" = 
+let%test_unit "repeat2" = 
   timed begin fun () -> 
     let a = repeat 'a' in 
     ['a';'a';'a';'a';'a';'a';'a';'a';'a';'a'] === (take_sol 10 a)
   end 
 
-TEST_UNIT "repeat3" = 
+let%test_unit "repeat3" = 
   timed begin fun () -> 
     let tru = repeat true in 
     [true;true;true;true;true] === (take_sol 5 tru)
   end 
 
-TEST_UNIT "repeat4" =
+let%test_unit "repeat4" =
   (* Tests using repeat to create the stream [2;2;2;2;...] *)
   timed begin fun () ->
     let two_list = take_sol 10 (Streams.repeat 2) in 
     (List.fold_left (fun acc x -> acc && (x = 2)) true two_list) === true
   end
 
-TEST_UNIT "map1" =
+let%test_unit "map1" =
   (* Tests using map to create the stream [0;2;4;6;8;...] *)
   timed begin fun () ->
     let evens = map (fun x -> x * 2) nats in
     (take_sol 10 evens) === [0;2;4;6;8;10;12;14;16;18]
   end
 
-TEST_UNIT "map2" =
+let%test_unit "map2" =
   (* Tests using map to create the stream ["0";"1";"2";...] *)
   timed begin fun () ->
     let strs = map string_of_int nats in
@@ -94,7 +94,7 @@ TEST_UNIT "map2" =
   end
 
 (* TODO aab227 : Might need some more tests for diag *)
-TEST_UNIT "diag1" =
+let%test_unit "diag1" =
   (* Tests using diag to create the stream of squares [0;1;4;9;...]
    * by creating rows of naturals and multiplying each by its row index *)
   timed begin fun () ->
@@ -104,7 +104,7 @@ TEST_UNIT "diag1" =
       squares === [0;1;4;9;16;25;36;49;64;81]
   end
 
-(* TEST_UNIT "diag2" = 
+(* let%test_unit "diag2" = 
   timed begin fun () -> 
     let ones = repeat 1 in 
     let matrix = 
@@ -115,7 +115,7 @@ TEST_UNIT "diag1" =
   end  *)
 
 
-TEST_UNIT "suffixes1" =
+let%test_unit "suffixes1" =
   (* Tests using suffixes to get the lower triangle of the nats x nats
    * matrix *)
   timed begin fun () ->
@@ -125,7 +125,7 @@ TEST_UNIT "suffixes1" =
     (take_sol 10 (suffixes nats))
   end
 
-TEST_UNIT "interleave1" =
+let%test_unit "interleave1" =
   timed begin fun () -> 
     let ones = unfold_sol (fun x -> x, 1) 1 in 
     let twos = unfold_sol (fun x -> x, 2) 2 in
@@ -133,7 +133,7 @@ TEST_UNIT "interleave1" =
     (take_sol 10 offset) === [1;2;1;2;1;2;1;2;1;2]
   end  
 
-TEST_UNIT "interleave2" =
+let%test_unit "interleave2" =
   (* Tests interleave by interleaving streams of even and odd numbers to
    * create the stream of natural numbers *)
   timed begin fun () ->
@@ -143,7 +143,7 @@ TEST_UNIT "interleave2" =
     (take_sol 10 nats_std) === nats_lst
   end 
 
-TEST_UNIT "fibs1" =
+let%test_unit "fibs1" =
   (* Tests fibs by taking 100 from the stream and checking that they satisfy
    * the Fibonacci recurrence *)
   timed begin fun () ->
@@ -153,14 +153,14 @@ TEST_UNIT "fibs1" =
     result === true
   end 
 
-TEST_UNIT "fibs2" =
+let%test_unit "fibs2" =
   (* Tests fibs by taking the first 10 from the stream *)
   timed begin fun () ->
     let fibs = Streams.fibs () in
     (take_sol 10 fibs) === [0;1;1;2;3;5;8;13;21;34]
   end
 
-TEST_UNIT "pi1" =
+let%test_unit "pi1" =
   (* Tests pi by checking that the first 100 terms in the stream satisfy
    * the Taylor error bound *)
   timed begin fun () ->
@@ -171,7 +171,7 @@ TEST_UNIT "pi1" =
     (List.fold_left (&&) true checks) === true
   end
 
-TEST_UNIT "pi2" =
+let%test_unit "pi2" =
   (* Checks the first 5 elements from the pi stream, to ensure it isn't
    * [pi;pi;pi...] or something *)
   timed begin fun () ->
@@ -186,7 +186,7 @@ TEST_UNIT "pi2" =
     assert_true (approx_equal l)
   end
 
-TEST_UNIT "lookandsay1" =
+let%test_unit "lookandsay1" =
   (* Checks the first 7 elements from the look and say stream *)
   timed begin fun () ->
     let correct =

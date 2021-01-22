@@ -1,11 +1,5 @@
-open Ast
 open TypedAst
-open Printer
-open Parser
 open Infer
-open Eval
-open Meta
-open Assertions
 
 let option_spec  = Parser.parse_variant_spec "type 'a option = Some of 'a | None of unit"
 
@@ -245,7 +239,7 @@ let pop_sol = Parser.parse_type "'a queue -> ('a * 'a queue) option"
 
   let level3_sol = [
     TArrow (TInt,TInt);
-    TArrow (TInt, TArrow (TInt, TBool));
+    TArrow (TAlpha "a", TArrow (TAlpha "a", TBool));
     TArrow (TInt, TInt);
     TInt;
     TArrow (TInt, TInt);
@@ -467,7 +461,7 @@ let level8_noerr = [
   ]
 
   let level9_sol = [
-    Parser.parse_type "int list -> int list";
+    Parser.parse_type "'a list -> 'a list";
     Parser.parse_type "('a -> 'a -> 'a -> 'a) -> 'a list -> 'a list";
     TBool
   ]
@@ -580,118 +574,118 @@ let run_test i j =
       raise (Test_failed (Format.sprintf "Test: %s" test_str))
     end
 
-TEST_UNIT "annotate1-1" = run_test 1 0
-TEST_UNIT "annotate1-2" = run_test 1 1
-TEST_UNIT "annotate1-3" = run_test 1 2
-TEST_UNIT "annotate1-4" = run_test 1 3
-TEST_UNIT "annotate1-5" = run_test 1 4
-TEST_UNIT "annotate1-6" = run_test 1 5
-TEST_UNIT "annotate1-7" = run_test 1 6
-TEST_UNIT "annotate1-8" = run_test 1 7
-TEST_UNIT "annotate1-9" = run_test 1 8
-TEST_UNIT "annotate1-10" = run_test 1 9
-TEST_UNIT "annotate1-11" = run_test 1 10
-TEST_UNIT "annotate1-12" = run_test 1 11
-TEST_UNIT "annotate1-13" = run_test 1 12
-TEST_UNIT "annotate1-14" = run_test 1 13
-TEST_UNIT "annotate2-1" = run_test 2 0
-TEST_UNIT "annotate2-2" = run_test 2 1
-TEST_UNIT "annotate2-3" = run_test 2 2
-TEST_UNIT "annotate2-4" = run_test 2 3
-TEST_UNIT "annotate2-5" = run_test 2 4
-TEST_UNIT "annotate2-6" = run_test 2 5
-TEST_UNIT "annotate2-7" = run_test 2 6
-TEST_UNIT "annotate2-8" = run_test 2 7
-TEST_UNIT "annotate2-9" = run_test 2 8
-TEST_UNIT "annotate2-10" = run_test 2 9
-TEST_UNIT "annotate2-11" = run_test 2 10
-TEST_UNIT "annotate2-12" = run_test 2 11
-TEST_UNIT "annotate3-1" = run_test 3 0
-TEST_UNIT "annotate3-2" = run_test 3 1
-TEST_UNIT "annotate3-3" = run_test 3 2
-TEST_UNIT "annotate3-4" = run_test 3 3
-TEST_UNIT "annotate3-5" = run_test 3 4
-TEST_UNIT "annotate3-6" = run_test 3 5
-TEST_UNIT "annotate3-7" = run_test 3 6
-TEST_UNIT "annotate3-8" = run_test 3 7
-TEST_UNIT "annotate3-9" = run_test 3 8
-TEST_UNIT "annotate4-1" = run_test 4 0
-TEST_UNIT "annotate4-2" = run_test 4 1
-TEST_UNIT "annotate4-3" = run_test 4 2
-TEST_UNIT "annotate4-4" = run_test 4 3
-TEST_UNIT "annotate4-5" = run_test 4 4
-TEST_UNIT "annotate4-6" = run_test 4 5
-TEST_UNIT "annotate4-7" = run_test 4 6
-TEST_UNIT "annotate4-8" = run_test 4 7
-TEST_UNIT "annotate4-9" = run_test 4 8
-TEST_UNIT "annotate4-10" = run_test 4 9
-TEST_UNIT "annotate4-11" = run_test 4 10
-TEST_UNIT "annotate4-12" = run_test 4 11
-TEST_UNIT "annotate4-13" = run_test 4 12
-TEST_UNIT "annotate4-14" = run_test 4 13
-TEST_UNIT "annotate4-15" = run_test 4 14
-TEST_UNIT "annotate5-1" = run_test 5 0
-TEST_UNIT "annotate5-2" = run_test 5 1
-TEST_UNIT "annotate5-3" = run_test 5 2
-TEST_UNIT "annotate5-4" = run_test 5 3
-TEST_UNIT "annotate5-5" = run_test 5 4
-TEST_UNIT "annotate5-6" = run_test 5 5
-TEST_UNIT "annotate5-7" = run_test 5 6
-TEST_UNIT "annotate5-8" = run_test 5 7
-TEST_UNIT "annotate5-10" = run_test 5 9
-TEST_UNIT "annotate5-11" = run_test 5 10
-TEST_UNIT "annotate5-12" = run_test 5 11
-TEST_UNIT "annotate5-13" = run_test 5 12
-TEST_UNIT "annotate5-14" = run_test 5 13
-TEST_UNIT "annotate6-1" = run_test 6 0
-TEST_UNIT "annotate6-2" = run_test 6 1
-TEST_UNIT "annotate6-3" = run_test 6 2
-TEST_UNIT "annotate6-4" = run_test 6 3
-TEST_UNIT "annotate6-5" = run_test 6 4
-TEST_UNIT "annotate6-6" = run_test 6 5
-TEST_UNIT "annotate6-7" = run_test 6 6
-TEST_UNIT "annotate6-8" = run_test 6 7
-TEST_UNIT "annotate6-9" = run_test 6 8
-TEST_UNIT "annotate6-10" = run_test 6 9
-TEST_UNIT "annotate6-11" = run_test 6 10
-TEST_UNIT "annotate7-1" = run_test 7 0
-TEST_UNIT "annotate7-2" = run_test 7 1
-TEST_UNIT "annotate8-1" = run_test 8 0
-TEST_UNIT "annotate8-2" = run_test 8 1
-TEST_UNIT "annotate8-3" = run_test 8 2
-TEST_UNIT "annotate8-4" = run_test 8 3
-TEST_UNIT "annotate8-5" = run_test 8 4
-TEST_UNIT "annotate8-6" = run_test 8 5
-TEST_UNIT "annotate8-7" = run_test 8 6
-TEST_UNIT "annotate9-1" = run_test 9 0
-TEST_UNIT "annotate9-2" = run_test 9 1
-TEST_UNIT "annotate9-3" = run_test 9 2
-TEST_UNIT "annotate10-1" = run_test 10 0
-TEST_UNIT "annotate10-2" = run_test 10 1
-TEST_UNIT "annotate10-3" = run_test 10 2
-TEST_UNIT "annotate10-4" = run_test 10 3
-TEST_UNIT "annotate11-1" = run_test 11 0
-TEST_UNIT "annotate11-2" = run_test 11 1
-TEST_UNIT "annotate11-3" = run_test 11 2
-TEST_UNIT "annotate11-4" = run_test 11 3
-TEST_UNIT "annotate11-5" = run_test 11 4
-TEST_UNIT "annotate11-6" = run_test 11 5
-TEST_UNIT "annotate11-7" = run_test 11 6
-TEST_UNIT "annotate11-8" = run_test 11 7
-TEST_UNIT "annotate11-9" = run_test 11 8
-TEST_UNIT "annotate11-10" = run_test 11 9
-TEST_UNIT "annotate11-11" = run_test 11 10
-TEST_UNIT "annotate11-12" = run_test 11 11
-TEST_UNIT "annotate11-13" = run_test 11 12
-TEST_UNIT "annotate12-1" = run_test 12 0
-TEST_UNIT "annotate12-2" = run_test 12 1
-TEST_UNIT "annotate12-3" = run_test 12 2
-TEST_UNIT "annotate12-4" = run_test 12 3
-TEST_UNIT "annotate12-5" = run_test 12 4
-TEST_UNIT "annotate12-6" = run_test 12 5
-TEST_UNIT "annotate12-7" = run_test 12 6
-TEST_UNIT "annotate12-8" = run_test 12 7
-TEST_UNIT "annotate13-1" = run_test 13 0
-TEST_UNIT "annotate13-2" = run_test 13 1
-TEST_UNIT "annotate13-3" = run_test 13 2
-TEST_UNIT "annotate13-4" = run_test 13 3
+let%test_unit "annotate1-1" = run_test 1 0
+let%test_unit "annotate1-2" = run_test 1 1
+let%test_unit "annotate1-3" = run_test 1 2
+let%test_unit "annotate1-4" = run_test 1 3
+let%test_unit "annotate1-5" = run_test 1 4
+let%test_unit "annotate1-6" = run_test 1 5
+let%test_unit "annotate1-7" = run_test 1 6
+let%test_unit "annotate1-8" = run_test 1 7
+let%test_unit "annotate1-9" = run_test 1 8
+let%test_unit "annotate1-10" = run_test 1 9
+let%test_unit "annotate1-11" = run_test 1 10
+let%test_unit "annotate1-12" = run_test 1 11
+let%test_unit "annotate1-13" = run_test 1 12
+let%test_unit "annotate1-14" = run_test 1 13
+let%test_unit "annotate2-1" = run_test 2 0
+let%test_unit "annotate2-2" = run_test 2 1
+let%test_unit "annotate2-3" = run_test 2 2
+let%test_unit "annotate2-4" = run_test 2 3
+let%test_unit "annotate2-5" = run_test 2 4
+let%test_unit "annotate2-6" = run_test 2 5
+let%test_unit "annotate2-7" = run_test 2 6
+let%test_unit "annotate2-8" = run_test 2 7
+let%test_unit "annotate2-9" = run_test 2 8
+let%test_unit "annotate2-10" = run_test 2 9
+let%test_unit "annotate2-11" = run_test 2 10
+let%test_unit "annotate2-12" = run_test 2 11
+let%test_unit "annotate3-1" = run_test 3 0
+let%test_unit "annotate3-2" = run_test 3 1
+let%test_unit "annotate3-3" = run_test 3 2
+let%test_unit "annotate3-4" = run_test 3 3
+let%test_unit "annotate3-5" = run_test 3 4
+let%test_unit "annotate3-6" = run_test 3 5
+let%test_unit "annotate3-7" = run_test 3 6
+let%test_unit "annotate3-8" = run_test 3 7
+let%test_unit "annotate3-9" = run_test 3 8
+let%test_unit "annotate4-1" = run_test 4 0
+let%test_unit "annotate4-2" = run_test 4 1
+let%test_unit "annotate4-3" = run_test 4 2
+let%test_unit "annotate4-4" = run_test 4 3
+let%test_unit "annotate4-5" = run_test 4 4
+let%test_unit "annotate4-6" = run_test 4 5
+let%test_unit "annotate4-7" = run_test 4 6
+let%test_unit "annotate4-8" = run_test 4 7
+let%test_unit "annotate4-9" = run_test 4 8
+let%test_unit "annotate4-10" = run_test 4 9
+let%test_unit "annotate4-11" = run_test 4 10
+let%test_unit "annotate4-12" = run_test 4 11
+let%test_unit "annotate4-13" = run_test 4 12
+let%test_unit "annotate4-14" = run_test 4 13
+let%test_unit "annotate4-15" = run_test 4 14
+let%test_unit "annotate5-1" = run_test 5 0
+let%test_unit "annotate5-2" = run_test 5 1
+let%test_unit "annotate5-3" = run_test 5 2
+let%test_unit "annotate5-4" = run_test 5 3
+let%test_unit "annotate5-5" = run_test 5 4
+let%test_unit "annotate5-6" = run_test 5 5
+let%test_unit "annotate5-7" = run_test 5 6
+let%test_unit "annotate5-8" = run_test 5 7
+let%test_unit "annotate5-10" = run_test 5 9
+let%test_unit "annotate5-11" = run_test 5 10
+let%test_unit "annotate5-12" = run_test 5 11
+let%test_unit "annotate5-13" = run_test 5 12
+let%test_unit "annotate5-14" = run_test 5 13
+let%test_unit "annotate6-1" = run_test 6 0
+let%test_unit "annotate6-2" = run_test 6 1
+let%test_unit "annotate6-3" = run_test 6 2
+let%test_unit "annotate6-4" = run_test 6 3
+let%test_unit "annotate6-5" = run_test 6 4
+let%test_unit "annotate6-6" = run_test 6 5
+let%test_unit "annotate6-7" = run_test 6 6
+let%test_unit "annotate6-8" = run_test 6 7
+let%test_unit "annotate6-9" = run_test 6 8
+let%test_unit "annotate6-10" = run_test 6 9
+let%test_unit "annotate6-11" = run_test 6 10
+let%test_unit "annotate7-1" = run_test 7 0
+let%test_unit "annotate7-2" = run_test 7 1
+let%test_unit "annotate8-1" = run_test 8 0
+let%test_unit "annotate8-2" = run_test 8 1
+let%test_unit "annotate8-3" = run_test 8 2
+let%test_unit "annotate8-4" = run_test 8 3
+let%test_unit "annotate8-5" = run_test 8 4
+let%test_unit "annotate8-6" = run_test 8 5
+let%test_unit "annotate8-7" = run_test 8 6
+let%test_unit "annotate9-1" = run_test 9 0
+let%test_unit "annotate9-2" = run_test 9 1
+let%test_unit "annotate9-3" = run_test 9 2
+let%test_unit "annotate10-1" = run_test 10 0
+let%test_unit "annotate10-2" = run_test 10 1
+let%test_unit "annotate10-3" = run_test 10 2
+let%test_unit "annotate10-4" = run_test 10 3
+let%test_unit "annotate11-1" = run_test 11 0
+let%test_unit "annotate11-2" = run_test 11 1
+let%test_unit "annotate11-3" = run_test 11 2
+let%test_unit "annotate11-4" = run_test 11 3
+let%test_unit "annotate11-5" = run_test 11 4
+let%test_unit "annotate11-6" = run_test 11 5
+let%test_unit "annotate11-7" = run_test 11 6
+let%test_unit "annotate11-8" = run_test 11 7
+let%test_unit "annotate11-9" = run_test 11 8
+let%test_unit "annotate11-10" = run_test 11 9
+let%test_unit "annotate11-11" = run_test 11 10
+let%test_unit "annotate11-12" = run_test 11 11
+let%test_unit "annotate11-13" = run_test 11 12
+let%test_unit "annotate12-1" = run_test 12 0
+let%test_unit "annotate12-2" = run_test 12 1
+let%test_unit "annotate12-3" = run_test 12 2
+let%test_unit "annotate12-4" = run_test 12 3
+let%test_unit "annotate12-5" = run_test 12 4
+let%test_unit "annotate12-6" = run_test 12 5
+let%test_unit "annotate12-7" = run_test 12 6
+let%test_unit "annotate12-8" = run_test 12 7
+let%test_unit "annotate13-1" = run_test 13 0
+let%test_unit "annotate13-2" = run_test 13 1
+let%test_unit "annotate13-3" = run_test 13 2
+let%test_unit "annotate13-4" = run_test 13 3

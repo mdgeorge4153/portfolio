@@ -47,11 +47,7 @@ Here are the files of interest:
 * `solution/mdg39` contains my reference solution
 
 * `testing/tests` contains the code we used to evaluate the students'
-  implementations during grading.  They are written to integrate with an
-  obsolete testing framework that was developed for internal use, so they are
-  not so easy to run currently, but I've included them so that you can see the
-  thoroughness of my test suite.
-
+  implementations during grading.
 
 and some of the other files included in this directory:
 
@@ -72,8 +68,7 @@ scripts to make it easier for you to build and run the code.
 
     cd solution/mdg39
     dune build
-    dune runtest # run the provided examples; as mentioned above, the full test
-                 # suite is not currently easy to run
+    dune runtest # run the provided examples and grading test suite
 
 The project is fun to play with in the toplevel.  The file `top.ml` contains a
 small test to play with, but the parser and printer make it easy to evaluate
