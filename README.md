@@ -196,21 +196,21 @@ My Fabric related publications are contained in the `pubs` directory:
 
 `pubs/dissert.pdf`
 : Trust, Authority, and Information Flow in Secure Distributed Systems.
-: Doctoral dissertation. Cornell University 2020.
+  Doctoral dissertation. Cornell University 2020.
 
 `pubs/fabric-jcs.pdf`
 : Fabric: Building Open Distributed Systems Securely by Construction.
-: J. Computer Security, 2017.
+  J. Computer Security, 2017.
   Jed Liu, Owen Arden, Michael D. George, and Andrew C. Myers.
 
 `pubs/mobile-oakland12.pdf`
 : Sharing Mobile Code Securely with Information Flow Control.
-: IEEE Symp. on Security and Privacy, May 2012.
+  IEEE Symp. on Security and Privacy, May 2012.
   Owen Arden, Michael D. George, Jed Liu, K. Vikram, Aslan Askarov, and Andrew C. Myers.
 
 `pubs/fabric-sosp09.pdf`
 : Fabric: A Platform for Secure Distributed Computation and Storage.
-: 22nd ACM Symp. on Operating System Principles (SOSP), October 2009.
+  22nd ACM Symp. on Operating System Principles (SOSP), October 2009.
   Jed Liu, Michael D. George, K. Vikram, Xin Qi, Lucas Waye, and Andrew C.  Myers.
 
 You can also find more information about the Fabric project at the
