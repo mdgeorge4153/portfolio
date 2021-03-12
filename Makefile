@@ -16,7 +16,7 @@ $(DIRECTORY).zip: $(DIRECTORY)
 	zip --symlinks -r $@ $^
 
 $(DIRECTORY).tar.gz: $(DIRECTORY)
-	tar -xzf $@ $^
+	tar -czf $@ $^
 
 .PHONY: all default check
 
