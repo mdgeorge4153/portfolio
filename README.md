@@ -1,5 +1,5 @@
-Michael George's Programming Portfolio
-======================================
+Michael George's Public Programming Portfolio
+=============================================
 
 * [LinkedIn](https://www.linkedin.com/in/mdgeorge/)
 
