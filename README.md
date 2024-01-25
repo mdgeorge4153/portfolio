@@ -47,6 +47,16 @@ detail below.
    a project to demonstrate the layout and operation of a log-structured
    filesystem.  Also serves as a demo for memory-mapped I/O and segmentation.
 
+### Techincal writing
+
+ * [`docs/certora`](docs/certora):
+   Certora's user-facing documentation; I was the primary author and editor.
+   I have written documentation in [user guide][multicontract-docs] and
+   [reference manual][methods-docs] genres.
+
+[multicontract-docs]: https://docs.certora.com/en/latest/docs/user-guide/multicontract/index.html
+[methods-docs]: https://docs.certora.com/en/latest/docs/cvl/methods.html
+
 ### Personal open-source experiments:
 
  * [`js/jamcircle`](#jamcircle):
@@ -183,7 +193,7 @@ bundle.  You can fetch it using git by running `git submodule update --init`,
 or you can browse the source [online](https://github.com/apl-cornell/fabric).
 
 Most of my graduate research was conducted in the context of the Fabric
-project.  I was one of four lead developrs of the Fabric language and system.
+project.  I was one of four lead developers of the Fabric language and system.
 Fabric is an extension of Java with language-level support for distributed
 computing, mobile code, and strong information flow control.
 

@@ -13,3 +13,6 @@
 [submodule "js/jamcircle"]
 	path = js/jamcircle
 	url = https://github.com/mdgeorge4153/jamcircle.git
+[submodule "docs/certora"]
+	path = docs/certora
+	url = https://github.com/Certora/Documentation.git
