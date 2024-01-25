@@ -7,6 +7,12 @@ library.  This project was the first async-based project in the history of CS
 3110; previous iterations of the course had the students implement MapReduce
 using threads.
 
+Files of note:
+ * `ps5b.pdf`   contains the complete assignment description
+ * `release`    contains the starter code that was provided to the students
+ * `sol/mdg39`  contains my complete working solution (removed from public repo;
+   ask me for a copy if interested)
+
 For this project, students were required to implement a controller that
 coordinates several remote workers to complete a MapReduce task.  In addition,
 the students were required to implement portions of the infrastructure for a

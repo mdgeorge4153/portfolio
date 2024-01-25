@@ -12,7 +12,8 @@ Students in the class work within the eclipse development environment; the
 release directory contains eclipse project files that they can load directly
 into eclipse.
 
-My solution is contained in the directory `solution/mdg39`.  There are eclipse
+My solution is contained in the directory `solution/mdg39` (removed from public
+repo; ask me for a copy if interested).  There are eclipse
 project files in that directory as well, so the easiest way to run the project
 is by importing it into eclipse and running it there.  Alternatively, you can
 compile and run the GUI at the command line:

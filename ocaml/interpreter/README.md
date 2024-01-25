@@ -6,6 +6,12 @@ The students were required to implement an interpreter for a typed subset of
 OCaml.  I completely redesigned the interpreter project that I inherited from
 previous semesters.
 
+Files of note:
+ * `ps3.pdf`   contains the complete assignment description
+ * `release`   contains the starter code that was provided to the students
+ * `sol/mdg39` contains my complete working solution (removed from public repo;
+   ask me for a copy if interested)
+
 Interpreter projects are a staple of functional programming courses.  There are
 a few details of this implementation give it an extra bit of polish, which I
 think improved the students' experience and learning outcomes:

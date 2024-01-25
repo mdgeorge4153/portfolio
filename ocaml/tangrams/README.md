@@ -10,7 +10,8 @@ system.
 Files of note:
  * `ps4.pdf`   contains the complete assignment description
  * `release`   contains the starter code that was provided to the students
- * `sol/mdg39` contains my complete working solution
+ * `sol/mdg39` contains my complete working solution (removed from public repo;
+   ask me for a copy if interested)
 
 Building and running
 --------------------
