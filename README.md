@@ -1,8 +1,7 @@
 Michael George's Programming Portfolio
 ======================================
 
-* [Website](https://www.cs.cornell.edu/~mdgeorge/)
-*   [Email](mailto:mdgeorge@cs.cornell.edu)
+* [LinkedIn](https://www.linkedin.com/in/mdgeorge/)
 
 This repository contains several samples of my work, highlighting a variety of
 programming projects that I've worked on in various languages and settings.
