@@ -56,10 +56,13 @@ detail below.
 [multicontract-docs]: https://docs.certora.com/en/latest/docs/user-guide/multicontract/index.html
 [methods-docs]: https://docs.certora.com/en/latest/docs/cvl/methods.html
 
- * [`pubs`](pubs/):
+ * [`pubs`](pubs/README.md):
    peer-reviewed publications that I have authored.
 
-### Personal open-source experiments:
+### Side projects:
+
+ * [`coq/math-classes`](#math-classes):
+   proof automation contributions to the open-source math-classes Coq library.
 
  * [`js/jamcircle`](#jamcircle):
    a prototype videoconferencing application designed for playing music
@@ -96,7 +99,7 @@ advantages of good software design.
 
 
 <a id="tangrams"></a>
-[Tangrams (CS 3110 Functional Programming)](ocaml/tangrams)
+[Tangrams (CS 3110 Functional Programming)](ocaml/tangrams/README.md)
 -----------------------------------------------------------
 
 This is a large project focusing on modular software design.  The students had
@@ -114,7 +117,7 @@ arbitrary precision arithmetic implemented by the students.
 
 
 <a id="interpreter"></a>
-[OCalf interpreter (CS 3110 Functional programming)](ocaml/interpreter)
+[OCalf interpreter (CS 3110 Functional programming)](ocaml/interpreter/README.md)
 -----------------------------------------------------------------------
 
 An interpreter is a staple of a functional programming course.  I redesigned
@@ -132,7 +135,7 @@ streamlined their experience and let them focus on the interesting problems.
 
 
 <a id="mapreduce"></a>
-[MapReduce (CS 3110 Functional programming)](ocaml/mapreduce)
+[MapReduce (CS 3110 Functional programming)](ocaml/mapreduce/README.md)
 -------------------------------------------------------------
 
 For historical reasons, Cornell's functional programming course (CS 3110) used
@@ -154,7 +157,7 @@ of the library that the students needed to interact with (see `doc/async.mli`).
 
 
 <a id="fiveinrow"></a>
-[Five in a row (CS 2110 Object oriented programming)](java/fiveinrow)
+[Five in a row (CS 2110 Object oriented programming)](java/fiveinrow/README.md)
 ---------------------------------------------------------------------
 
 This project was given midway through the object-oriented programming course,
@@ -166,7 +169,7 @@ an interface by having them implement the same interface in multiple ways.
 
 
 <a id="lfs"></a>
-[Log-structured Filesystem (CS 4410 Operating Systems)](c/lfs)
+[Log-structured Filesystem (CS 4410 Operating Systems)](c/lfs/README.md)
 --------------------------------------------------------------
 
 Cornell's OS course has traditionally had a userspace log-structured filesystem
@@ -187,7 +190,7 @@ I/O and memory segmentation.
 
 
 <a id="fabric"></a>
-[Graduate Research Project (Fabric)](java/fabric)
+[Graduate Research Project (Fabric)](java/fabric/README.md)
 =================================================
 
 **Note:** the Fabric repository is very large, so I haven't included it in this
@@ -237,6 +240,18 @@ They are less complete and less polished than the professional projects above,
 but they give some idea of the things I'm interested in and my approach to
 exploration.
 
+<a id="math-classes"></a>
+[Math-classes](coq/math-classes):
+---------------------------------
+
+One of my favorite "hello world" applications for learning new languages is to
+implement some concepts from abstract algebra and use them to implement
+computational geometry algorithms.  This repo contains the beginnings of a coq
+implementation.  I have built on the `math-classes` library, adding definitions
+of ordered rings and fields based on positive cones.
+
+As part of the process, I built some proof automation for simplifying group
+expressions; these contributions have been merged upstream.
 
 <a id="jamcircle"></a>
 [JamCircle](js/jamcircle)

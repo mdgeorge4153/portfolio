@@ -16,3 +16,6 @@
 [submodule "docs/certora"]
 	path = docs/certora
 	url = https://github.com/Certora/Documentation.git
+[submodule "coq/math-classes"]
+	path = coq/math-classes
+	url = https://github.com/mdgeorge4153/math-classes
