@@ -51,11 +51,14 @@ detail below.
 
  * [`docs/certora`](docs/certora):
    Certora's user-facing documentation; I was the primary author and editor.
-   I have written documentation in [user guide][multicontract-docs] and
+   Contains documentation I have written in [user guide][multicontract-docs] and
    [reference manual][methods-docs] genres.
 
 [multicontract-docs]: https://docs.certora.com/en/latest/docs/user-guide/multicontract/index.html
 [methods-docs]: https://docs.certora.com/en/latest/docs/cvl/methods.html
+
+ * [`pubs`](pubs/):
+   peer-reviewed publications that I have authored.
 
 ### Personal open-source experiments:
 
