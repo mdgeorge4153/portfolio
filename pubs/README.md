@@ -2,7 +2,7 @@ Publications
 ============
 
 [OCaml Programming: Correct + Efficient + Beautiful][ocaml-book].
-Michael R.\@ Clarkson et al.  Michael D.\@ George is a contributing author.
+Michael R. Clarkson et al.  Michael D. George is a contributing author.
 
 [ocaml-book]: https://cs3110.github.io/textbook/cover.html
 
