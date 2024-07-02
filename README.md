@@ -46,7 +46,7 @@ detail below.
    a project to demonstrate the layout and operation of a log-structured
    filesystem.  Also serves as a demo for memory-mapped I/O and segmentation.
 
-### Techincal writing
+### Technical writing
 
  * [`docs/certora`](docs/certora):
    Certora's user-facing documentation; I was the primary author and editor.
