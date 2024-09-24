@@ -46,7 +46,7 @@ detail below.
    a project to demonstrate the layout and operation of a log-structured
    filesystem.  Also serves as a demo for memory-mapped I/O and segmentation.
 
-### Technical writing
+### Technical writing and education
 
  * [`docs/certora`](docs/certora):
    Certora's user-facing documentation; I was the primary author and editor.
@@ -58,6 +58,12 @@ detail below.
 
  * [`pubs`](pubs/README.md):
    peer-reviewed publications that I have authored.
+
+ * [ETH Denver 2022][eth-denver]: A 15-minute overview of Certora's technology that
+   I delivered at ETH Denver.
+
+[eth-denver]: https://www.youtube.com/watch?v=hSH0UbwEvU4&t=784s
+
 
 ### Side projects:
 
