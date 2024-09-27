@@ -62,7 +62,7 @@ detail below.
  * [ETH Denver 2022][eth-denver]: A 15-minute overview of Certora's technology that
    I delivered at ETH Denver.
 
-[eth-denver]: https://www.youtube.com/watch?v=hSH0UbwEvU4&t=784s
+[eth-denver]: https://www.youtube.com/watch?v=hSH0UbwEvU4
 
 
 ### Side projects:
