@@ -12,11 +12,29 @@ can view the version history and other related public information.
 
 Each project has a README file in its top-level directory containing
 information about the file organization and how to build and run the project.
-I've tested everything on Ubuntu 20.04 (focal); some of the projects may
+I tested the older projects on Ubuntu 20.04 (focal); some of the projects may
 require a bit of work to build or run on other platforms.
 
 Here is a brief outline of the projects; the projects are described in further
 detail below.
+
+### Industry projects (Mysten Labs):
+
+ * [Sui package manager](#sui-packages):
+   a redesign and reimplementation of the package system for the Move
+   programming language, used by every Sui developer.
+
+ * [`rust/source-verification-service`](#source-verification):
+   a service that rebuilds Move packages inside a secure enclave and attests
+   on chain that deployed bytecode matches its published source.
+
+ * [`move/attestations`](#attestations):
+   a registry for typed, on-chain attestations (such as audits) about Sui
+   packages.
+
+ * [AI audit platform](#ai-audit):
+   a prototype platform for running confidential AI audit skills in secure
+   enclaves (not public).
 
 ### Large research projects:
 
@@ -57,7 +75,8 @@ detail below.
 [methods-docs]: https://docs.certora.com/en/latest/docs/cvl/methods.html
 
  * [`pubs`](pubs/README.md):
-   peer-reviewed publications that I have authored.
+   peer-reviewed publications that I have authored, plus a paper on the Move
+   borrow checker that builds on my ideas.
 
  * [ETH Denver 2022][eth-denver]: A 15-minute overview of Certora's technology that
    I delivered at ETH Denver.
@@ -66,6 +85,9 @@ detail below.
 
 
 ### Side projects:
+
+ * [`lean/cglean`](#cglean):
+   verified exact-arithmetic computational geometry in Lean 4.
 
  * [`coq/math-classes`](#math-classes):
    proof automation contributions to the open-source math-classes Coq library.
@@ -82,6 +104,85 @@ detail below.
  * [`ocaml/sorts`](#sorts):
    a monadic framework for animating in-place sorting algorithms.
 
+
+Industry projects (Mysten Labs)
+===============================
+
+From 2024 to 2026 I was a senior software engineer on the developer experience
+team at Mysten Labs, the company behind the Sui blockchain and the Move
+programming language.
+
+<a id="sui-packages"></a>
+[Sui package manager](https://github.com/MystenLabs/sui/tree/main/external-crates/move/crates/move-package)
+-------------------
+
+**Note:** the Sui repository is very large, so I haven't included it as a
+submodule; the link above goes to the package manager crate.
+
+The original Move package system had trouble with deployment to more than one
+chain or environment, dependency conflicts, and version resolution. I redesigned
+the package system and led a team of three full-time developers in
+reimplementing it. It was developed as `move-package-alt` and has
+since fully replaced the legacy package manager.
+
+The new system:
+
+ - is designed for multiple environments: a package never needs more than one
+   `Move.toml`;
+ - is predictable: dependencies only change when the manifest changes, and
+   builds work offline;
+ - uses local naming, so a package can depend on several packages with the same
+   name;
+ - adds conveniences such as faster git downloads, stored upgrade capabilities,
+   and tooling for local test publication.
+
+I also wrote the design documents and the user-facing
+[migration guide](https://docs.sui.io/references/package-managers/package-manager-migration).
+
+<a id="source-verification"></a>
+[Source verification service](rust/source-verification-service/README.md)
+---------------------------
+
+A package published on Sui exists on chain only as bytecode; nothing ties it to
+the source code that a project points to. This service closes that gap without
+asking anyone to trust it. An AWS Nitro enclave clones the source, rebuilds it
+with the compiler the package was published with, and compares the result to
+the on-chain bytecode and linkage. When they match, it signs a statement that
+anyone can record on chain as an attestation. The enclave's measurements show
+what code produced the signature, and anyone can reproduce the check.
+
+As part of this work I also reimplemented the `sui move verify-source` command
+in the Sui CLI.
+
+<a id="attestations"></a>
+[Attestation registry](move/attestations/README.md)
+--------------------
+
+A Move primitive for typed, on-chain attestations about packages, addresses, or
+any other object. Its key design property is that each attestation schema's
+package has complete control over its own attestations: Move's type system
+ensures that only the package defining a schema can issue or revoke
+attestations of that type. I worked with external audit firms to publish audit
+reports through the registry on testnet.
+
+<a id="ai-audit"></a>
+AI audit platform
+-----------------
+
+The code for this project is not public, so I can only describe it here.
+
+Mysten's security team had developed a set of AI skills for auditing smart
+contracts, but they had to run audits by hand, and they had no way to prove to
+anyone that an audit had actually been run. The skills themselves could not be
+released, because they would be just as useful to attackers.
+
+I conceived of, designed, and prototyped a general platform to solve this. Skill
+authors publish their skills in encrypted form, along with a smart contract that
+sets their own permission and payment structure. A secure enclave runs the
+skills on a developer's package and returns an encrypted report. The report can
+include a certificate that the developer can use to publish an on-chain
+attestation. Developers can self-serve audits in a controlled way, and the
+skills and any vulnerabilities found stay confidential.
 
 Projects developed for courses
 ==============================
@@ -245,6 +346,15 @@ These projects are ideas that I've explored out of curiousity in my free time.
 They are less complete and less polished than the professional projects above,
 but they give some idea of the things I'm interested in and my approach to
 exploration.
+
+<a id="cglean"></a>
+[CGLean](lean/cglean/README.md)
+-------------------------------
+
+Exact-arithmetic computational geometry in Lean 4, with machine-checked proofs.
+It has number representations that compute without rounding error, and planar
+geometry built on top of them. This continues the line of exploration described
+under [JAlgebra](#jalgebra) below, this time with machine-checked proofs.
 
 <a id="math-classes"></a>
 [Math-classes](coq/math-classes):

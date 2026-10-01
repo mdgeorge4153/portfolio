@@ -19,3 +19,12 @@
 [submodule "coq/math-classes"]
 	path = coq/math-classes
 	url = https://github.com/mdgeorge4153/math-classes
+[submodule "rust/source-verification-service"]
+	path = rust/source-verification-service
+	url = https://github.com/MystenLabs/source-verification-service.git
+[submodule "move/attestations"]
+	path = move/attestations
+	url = https://github.com/MystenLabs/attestations.git
+[submodule "lean/cglean"]
+	path = lean/cglean
+	url = https://github.com/mdgeorge4153/cglean.git
